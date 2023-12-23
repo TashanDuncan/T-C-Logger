@@ -29,14 +29,15 @@ model items {
 }
 
 model user_items {
-  id         Int      @id @default(autoincrement())
-  user_id    Int
-  item_id    Int
-  rating     Int
-  review     String?
-  created_at DateTime @db.Date
-  items      items    @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users      users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  item_id     Int
+  rating      Int
+  experienced Boolean  @default(false)
+  review      String?
+  created_at  DateTime @db.Date
+  items       items    @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users {
