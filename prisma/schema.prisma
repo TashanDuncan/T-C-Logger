@@ -9,14 +9,14 @@ datasource db {
 }
 
 model item_types {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   name        String  @db.VarChar(255)
   description String?
   items       items[]
 }
 
 model items {
-  id          Int          @id
+  id          Int          @id @default(autoincrement())
   title       String       @db.VarChar(255)
   description String?
   type_id     Int
@@ -29,7 +29,7 @@ model items {
 }
 
 model user_items {
-  id         Int      @id
+  id         Int      @id @default(autoincrement())
   user_id    Int
   item_id    Int
   rating     Int
