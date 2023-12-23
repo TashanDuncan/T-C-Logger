@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Page() {
   return (
     <>
@@ -11,17 +13,17 @@ export default function Page() {
         <h1>Profiles</h1>
         <div>
           <div>
-            <img src="./assets/c80dc137-65a8-4995-aa47-0ed96e339e39.jpg" />
+            <Image src="/tashan.jpg" alt={""} />
             <span>Tashan</span>
           </div>
           <div>
             <a href="./things/main-page.html">
-              <img src="./assets/christina.PNG" />
+              <Image src="/christina.PNG" alt={""} />
             </a>
             <span>Christina</span>
           </div>
           <div>
-            <img src="./assets/guest.png" />
+            <Image src="/guest.png" alt={""} />
             <span>Guest</span>
           </div>
         </div>
