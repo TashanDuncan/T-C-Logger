@@ -1,3 +1,5 @@
+import LogTable from "@/app/ui/logger/table";
+
 export default function Page() {
-  return <h1>logger</h1>
+  return <LogTable />;
 }
