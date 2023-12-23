@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model item_types {
@@ -19,7 +20,7 @@ model items {
   title       String       @db.VarChar(255)
   description String?
   type_id     Int
-  tags        String[]
+  tags        tags[]
   created_by  Int
   created_at  DateTime     @db.Date
   users       users        @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -48,4 +49,10 @@ model users {
   user_items  user_items[]
   users       users?       @relation("usersTousers", fields: [partner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   other_users users[]      @relation("usersTousers")
+}
+
+model tags {
+  id    Int     @id @default(autoincrement())
+  name  String
+  posts items[]
 }
