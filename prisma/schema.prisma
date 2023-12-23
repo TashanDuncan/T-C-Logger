@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model item_types {
+  id          Int     @id
+  name        String  @db.VarChar(255)
+  description String?
+  items       items[]
+}
+
+model items {
+  id          Int          @id
+  title       String       @db.VarChar(255)
+  description String?
+  type_id     Int
+  tags        String[]
+  created_by  Int
+  created_at  DateTime     @db.Date
+  users       users        @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  item_types  item_types   @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_items  user_items[]
+}
+
+model user_items {
+  id         Int      @id
+  user_id    Int
+  item_id    Int
+  rating     Int
+  review     String?
+  created_at DateTime @db.Date
+  items      items    @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users      users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id          Int          @id
+  name        String       @db.VarChar(255)
+  email       String       @unique
+  partner_id  Int?
+  password    String
+  items       items[]
+  user_items  user_items[]
+  users       users?       @relation("usersTousers", fields: [partner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_users users[]      @relation("usersTousers")
+}
