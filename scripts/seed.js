@@ -4,8 +4,44 @@ const {
   itemTypes,
   users,
   userItems,
+  tags,
 } = require("../src/app/lib/placeholder-data.js");
 const bcrypt = require("bcrypt");
+
+async function seedTags(client) {
+  try {
+    // Create the "tags" table if it doesn't exist
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS tags (
+        id INT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+      );
+    `;
+
+    console.log(`Created "tags" table`);
+
+    // Insert data into the "tags" table
+    const insertedTags = await Promise.all(
+      tags.map(
+        (tag) => client.sql`
+        INSERT INTO tags (id, name)
+        VALUES (${tag.id}, ${tag.name})
+        ON CONFLICT (id) DO NOTHING;
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedTags.length} tags`);
+
+    return {
+      createTable,
+      tags: insertedTags,
+    };
+  } catch (error) {
+    console.error("Error seeding tags:", error);
+    throw error;
+  }
+}
 
 async function seedUsers(client) {
   try {
@@ -61,7 +97,6 @@ async function seedUsers(client) {
 
 async function seedItemTypes(client) {
   try {
-
     // Create the "item_types" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS item_types (
@@ -98,7 +133,6 @@ async function seedItemTypes(client) {
 
 async function seedItems(client) {
   try {
-
     // Create the "items" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS items (
@@ -106,7 +140,7 @@ async function seedItems(client) {
     title VARCHAR(255) NOT NULL,
     description TEXT,
     type_id INT NOT NULL,
-    tags TEXT[] NOT NULL,
+    tags tags[],
     created_by INT NOT NULL,
     created_at DATE NOT NULL,
     FOREIGN KEY (type_id) REFERENCES item_types(id),
@@ -141,7 +175,6 @@ async function seedItems(client) {
 
 async function seedUserItems(client) {
   try {
-
     // Create the "user_items" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS user_items (
@@ -180,7 +213,6 @@ async function seedUserItems(client) {
     throw error;
   }
 }
-
 
 async function main() {
   const client = await db.connect();

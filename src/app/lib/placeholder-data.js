@@ -1,3 +1,18 @@
+const tags = [
+  {
+    id: "1",
+    name: "anime",
+  },
+  {
+    id: "2",
+    name: "romance",
+  },
+  {
+    id: "3",
+    name: "fighting",
+  },
+];
+
 const users = [
   {
     id: "1",
@@ -12,8 +27,8 @@ const users = [
     email: "christina@example",
     partner_id: "1",
     password: "anotherPassword",
-  }
-]
+  },
+];
 const itemTypes = [
   {
     id: "1",
@@ -34,8 +49,8 @@ const itemTypes = [
     id: "4",
     name: "restaurants",
     description: "Restaurants",
-  }
-]
+  },
+];
 
 const items = [
   {
@@ -73,7 +88,7 @@ const items = [
     tags: ["tag1", "tag2", "tag3"],
     created_by: "2",
     created_at: "2021-01-01",
-  }
+  },
 ];
 
 const userItems = [
@@ -108,32 +123,13 @@ const userItems = [
     rating: "7",
     review: "This is a review",
     created_at: "2021-01-01",
-  }
-];
-
-const tags = [
-  {
-    id: "1",
-    name: "tag1",
-    description: "This is tag 1",
   },
-  {
-    id: "2",
-    name: "tag2",
-    description: "This is tag 2",
-  },
-  {
-    id: "3",
-    name: "tag3",
-    description: "This is tag 3",
-  }
 ];
-
 
 module.exports = {
   users,
   itemTypes,
   items,
   userItems,
-  tags
+  tags,
 };
