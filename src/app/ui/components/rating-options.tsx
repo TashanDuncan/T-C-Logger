@@ -1,4 +1,4 @@
-import { user_items } from "@prisma/client";
+"use client";
 import {
   Select,
   SelectContent,
