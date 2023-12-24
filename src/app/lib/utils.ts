@@ -6,29 +6,43 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
+export enum RatingValue {
+  Appalling = "(1) Appalling",
+  Horrible = "(2) Horrible",
+  VeryBad = "(3) Very Bad",
+  Bad = "(4) Bad",
+  Average = "(5) Average",
+  Fine = "(6) Fine",
+  Good = "(7) Good",
+  VeryGood = "(8) Very Good",
+  Great = "(9) Great",
+  Masterpiece = "(10) Masterpiece",
+  NoRating = "No Rating",
+}
+
 export function getRatingValue(rating: number) {
   switch (rating) {
     case 1:
-      return "(1) Appalling";
+      return RatingValue.Appalling;
     case 2:
-      return "(2) Horrible";
+      return RatingValue.Horrible;
     case 3:
-      return "(3) Very Bad";
+      return RatingValue.VeryBad;
     case 4:
-      return "(4) Bad";
+      return RatingValue.Bad;
     case 5:
-      return "(5) Average";
+      return RatingValue.Average;
     case 6:
-      return "(6) Fine";
+      return RatingValue.Fine;
     case 7:
-      return "(7) Good";
+      return RatingValue.Good;
     case 8:
-      return "(8) Very Good";
+      return RatingValue.VeryGood;
     case 9:
-      return "(9) Great";
+      return RatingValue.Great;
     case 10:
-      return "(10) Masterpiece";
+      return RatingValue.Masterpiece;
     default:
-      return "No Rating";
+      return RatingValue.NoRating;
   }
 }
