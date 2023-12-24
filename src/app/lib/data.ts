@@ -11,15 +11,21 @@ export async function fetchItems() {
       include: {
         tags: true,
         user_items: {
-         where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
+          where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
         },
       },
     });
 
-    console.log(items);
-    console.log(items[0].user_items);
+    const itemsWithAvgRating = items.map((item) => {
+      const ratings = item.user_items.map((user_item) => user_item.rating);
+      const avgRating =
+        ratings.reduce((a, b) => a + b, 0) / ratings.filter(Boolean).length;
+      return { ...item, avgRating };
+    });
+
+    console.log(itemsWithAvgRating);
     await prisma.$disconnect();
-    return items;
+    return itemsWithAvgRating;
   } catch (error) {
     console.error("Database Error:", error);
     await prisma.$disconnect();
