@@ -1,43 +1,47 @@
-"use client"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import { item_types } from "@prisma/client";
+import { fetchItemTypes } from "@/app/lib/data";
+import HomeNavLink from "../components/home-nav-link";
+import { Button } from "../components/ui/button";
 
-
-import Link from 'next/link';
-import { usePathname} from 'next/navigation'
-import clsx from 'clsx';
-
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
-const links = [
-  { name: 'Home', href: '/logger' },
-  {
-    name: 'TV Shows',
-    href: '/logger/tv',
-  },
-  { name: 'Games', href: '/games' },
-  { name: 'Movies', href: '/movies' },
-
-];
-
-export default function NavLinks() {
-  const pathname = usePathname();
+export default async function NavLinks({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+  };
+}) {
+  const itemTypes = await fetchItemTypes();
 
   return (
     <>
-      {links.map((link) => {
+      <HomeNavLink />
+      {itemTypes.map((itemType) => {
         return (
           <Link
-            key={link.name}
-            href={link.href}
+            key={itemType.id}
+            href={itemType.name}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              "flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
               {
-                'text-blue-600': pathname === link.href,
-              },
-            )}          >
-            <p className="hidden md:block">{link.name}</p>
+                "text-blue-600": searchParams?.query?.includes(itemType.name),
+              }
+            )}
+          >
+            <p className="hidden md:block">{itemType.description}</p>
           </Link>
         );
       })}
+      <Link
+        href={"/items/new"}
+        className={
+          "flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
+        }
+      >
+        <Button className="hidden md:block text-center">Add New</Button>
+      </Link>
     </>
   );
 }
