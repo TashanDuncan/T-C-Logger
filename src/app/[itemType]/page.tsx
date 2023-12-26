@@ -27,10 +27,10 @@ export default async function Page() {
         <TableRow>
           <TableHead>Name</TableHead>
           <TableHead className="hidden md:table-cell">Tags</TableHead>
-          <TableHead>Experienced</TableHead>
+          <TableHead className="hidden md:table-cell">Experienced</TableHead>
           <TableHead>Your Rating</TableHead>
           <TableHead>Partner Rating</TableHead>
-          <TableHead className="hidden md:table-cell">Average Rating</TableHead>
+          <TableHead>Average Rating</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -50,7 +50,7 @@ export default async function Page() {
                   </Badge>
                 ))}
               </TableCell>
-              <TableCell className="flex space-x-5">
+              <TableCell className="hidden md:flex space-x-5">
                 {userItem.experienced && (
                   <div>
                     <Avatar>
@@ -70,11 +70,11 @@ export default async function Page() {
               </TableCell>
               <TableCell>{getRatingValue(userItem.rating)}</TableCell>
               <TableCell>{getRatingValue(partnerItem.rating)}</TableCell>
-              <TableCell className="hidden md:table-cell">{getRatingValue(item.avgRating)}</TableCell>
+              <TableCell>{getRatingValue(item.avgRating)}</TableCell>
               <TableCell>
                 <div className="flex space-x-4 justify-start align-top">
-                  <PencilLineIcon className="hover:text-blue-600" />
-                  <Trash2Icon className="hover:text-blue-600" />
+                  <PencilLineIcon className="hover:text-blue-600 shrink-0 w-4 h-4 md:w-5 md:h-5" />
+                  <Trash2Icon className="hover:text-blue-600 shrink-0 w-4 h-4 md:w-5 md:h-5" />
                 </div>
               </TableCell>
             </TableRow>
