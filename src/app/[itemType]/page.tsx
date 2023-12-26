@@ -21,16 +21,16 @@ import { PencilLineIcon, Trash2Icon } from "lucide-react";
 export default async function Page() {
   const items = await fetchItems();
   return (
-    <Table>
+    <Table className="table-fixed">
       <TableCaption>A list of your items.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
-          <TableHead>Tags</TableHead>
+          <TableHead className="hidden md:table-cell">Tags</TableHead>
           <TableHead>Experienced</TableHead>
           <TableHead>Your Rating</TableHead>
           <TableHead>Partner Rating</TableHead>
-          <TableHead>Average Rating</TableHead>
+          <TableHead className="hidden md:table-cell">Average Rating</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -43,7 +43,7 @@ export default async function Page() {
           return (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>
-              <TableCell>
+              <TableCell className="hidden md:table-cell">
                 {tags.map((tag) => (
                   <Badge key={tag.id} className="mx-2">
                     {tag.name}
@@ -70,7 +70,7 @@ export default async function Page() {
               </TableCell>
               <TableCell>{getRatingValue(userItem.rating)}</TableCell>
               <TableCell>{getRatingValue(partnerItem.rating)}</TableCell>
-              <TableCell>{getRatingValue(item.avgRating)}</TableCell>
+              <TableCell className="hidden md:table-cell">{getRatingValue(item.avgRating)}</TableCell>
               <TableCell>
                 <div className="flex space-x-4 justify-start align-top">
                   <PencilLineIcon className="hover:text-blue-600" />
