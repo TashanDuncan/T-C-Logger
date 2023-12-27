@@ -12,7 +12,7 @@ export default async function Home() {
       <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
         <text x="0" y="50" className="text-white text-lg">
           <textPath href="#curve" className="fill-current">
-            Tashan's + Christina's Favorites
+            Tashan&apos;s + Christina&apos;s Favorites
           </textPath>
         </text>
         <path id="curve" d="M10 80 Q 120 10 240 80" className="stroke-current text-black" />
