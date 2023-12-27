@@ -1,6 +1,6 @@
 import SideNav from "@/app/ui/logger/sidenav";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Nunito_Sans as FontSans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/app/lib/utils";
