@@ -16,7 +16,7 @@ export default function NavLinks({ links }: { links: JSX.Element[] }) {
     }).props.className =
       "text-blue-600 flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3";
     router.refresh();
-  }, [pathname, linkList]);
+  }, [pathname, linkList, router]);
   return (
     <>
       <HomeNavLink />
