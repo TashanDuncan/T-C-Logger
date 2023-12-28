@@ -2,7 +2,7 @@ import Link from "next/link";
 import NavLinks from "@/app/ui/nav-links";
 import Image from "next/image";
 import { fetchItemTypes } from "../lib/data";
-
+import { ThemeToggle } from "./components/theme-toggle";
 
 export default async function SideNav() {
   const res = await fetchItemTypes();
@@ -35,11 +35,15 @@ export default async function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks links={itemTypeLinks} />
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
-        <form>
-          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
+        <span>Signed in as Tashan</span>
+        <div className="flex justify-between">
+          <form>
+            <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+              <div className="hidden md:block">Sign Out</div>
+            </button>
+          </form>
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   );
