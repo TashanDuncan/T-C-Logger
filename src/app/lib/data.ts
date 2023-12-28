@@ -23,7 +23,6 @@ export async function fetchItems() {
       return { ...item, avgRating };
     });
 
-    console.log(itemsWithAvgRating);
     await prisma.$disconnect();
     return itemsWithAvgRating;
   } catch (error) {

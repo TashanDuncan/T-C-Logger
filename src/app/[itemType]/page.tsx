@@ -39,7 +39,6 @@ export default async function Page() {
           const { tags, user_items } = item;
           const userItem = user_items[0];
           const partnerItem = user_items[1];
-          console.log(partnerItem.experienced);
           return (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>

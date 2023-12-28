@@ -11,7 +11,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function NavLinks({ links }: { links: JSX.Element[] }) {
   const [linkList] = useState<any[]>(links);
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -19,8 +18,7 @@ export default function NavLinks({ links }: { links: JSX.Element[] }) {
       return `/${link.props.href}` === pathname;
     }).props.className =
       "text-blue-600 flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3";
-    router.replace(pathname);
-  }, [pathname, linkList, router]);
+  }, [pathname, linkList]);
   return (
     <>
       <HomeNavLink />
