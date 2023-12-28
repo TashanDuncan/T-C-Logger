@@ -44,7 +44,9 @@ export default async function Home() {
                 </Link>
               ))}
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Add New</DropdownMenuItem>
+            <Link href={"/categories/new"}>
+              <DropdownMenuItem>Add New</DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
