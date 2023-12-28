@@ -1,4 +1,4 @@
-import { fetchItems } from "@/app/lib/data";
+import { fetchItems, fetchItemsByType } from "@/app/lib/data";
 import { getRatingValue } from "@/app/lib/utils";
 import {
   Avatar,
@@ -6,6 +6,7 @@ import {
   AvatarImage,
 } from "@/app/ui/components/ui/avatar";
 import { Badge } from "@/app/ui/components/ui/badge";
+import { headers } from "next/headers";
 
 import {
   Table,
@@ -19,7 +20,10 @@ import {
 import { PencilLineIcon, Trash2Icon } from "lucide-react";
 
 export default async function Page() {
-  const items = await fetchItems();
+  const headersList = headers();
+  const activePath = await headersList.get("next-url");
+  const items = await fetchItemsByType(activePath?.replace("/", "") || "");
+
   return (
     <Table className="table-fixed">
       <TableCaption>A list of your items.</TableCaption>
@@ -35,8 +39,9 @@ export default async function Page() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {items.map((item) => {
+        {items?.map((item) => {
           const { tags, user_items } = item;
+
           const userItem = user_items[0];
           const partnerItem = user_items[1];
           return (

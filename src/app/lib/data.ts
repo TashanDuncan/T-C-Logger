@@ -1,8 +1,24 @@
-import { PrismaClient } from "@prisma/client";
-import { sql } from "@vercel/postgres";
+import { PrismaClient, items, user_items } from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
 
 const prisma = new PrismaClient();
+
+function calculateAvgRating(items: any[]) {
+  return items.map((item) => {
+    const ratings = item.user_items.map(
+      (user_item: user_items) => user_item.rating
+    );
+    const avgRating =
+      ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length;
+    return { ...item, avgRating };
+  });
+}
+
+async function handleDatabaseError(error: unknown) {
+  console.error("Database Error:", error);
+  await prisma.$disconnect();
+  throw new Error("Failed to fetch item data.");
+}
 
 export async function fetchItems() {
   noStore();
@@ -16,19 +32,12 @@ export async function fetchItems() {
       },
     });
 
-    const itemsWithAvgRating = items.map((item) => {
-      const ratings = item.user_items.map((user_item) => user_item.rating);
-      const avgRating =
-        ratings.reduce((a, b) => a + b, 0) / ratings.length;
-      return { ...item, avgRating };
-    });
+    const itemsWithAvgRating = calculateAvgRating(items);
 
     await prisma.$disconnect();
     return itemsWithAvgRating;
   } catch (error) {
-    console.error("Database Error:", error);
-    await prisma.$disconnect();
-    throw new Error("Failed to fetch item data.");
+    await handleDatabaseError(error);
   }
 }
 
@@ -39,8 +48,33 @@ export async function fetchItemTypes() {
     await prisma.$disconnect();
     return itemTypes;
   } catch (error) {
-    console.error("Database Error:", error);
+    await handleDatabaseError(error);
+  }
+}
+
+export async function fetchItemsByType(type: string) {
+  noStore();
+  try {
+    const itemTypes = await prisma.item_types.findUnique({
+      where: { slug: type },
+      include: {
+        items: {
+          include: {
+            tags: true,
+            user_items: {
+              where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
+            },
+          },
+        },
+      },
+    });
+    let itemsWithAvgRating;
+    if (itemTypes) {
+      itemsWithAvgRating = calculateAvgRating(itemTypes.items);
+    }
     await prisma.$disconnect();
-    throw new Error("Failed to fetch item type data.");
+    return itemsWithAvgRating;
+  } catch (error) {
+    await handleDatabaseError(error);
   }
 }
