@@ -1,16 +1,10 @@
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./ui/components/ui/dropdown-menu";
 import { Button } from "./ui/components/ui/button";
@@ -43,11 +37,12 @@ export default async function Home() {
           <DropdownMenuLabel>Our Favourites</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {itemTypes.map((item, i) => (
-              <Link href={item.slug} key={i}>
-                <DropdownMenuItem>{item.description}</DropdownMenuItem>
-              </Link>
-            ))}
+            {itemTypes &&
+              itemTypes.map((item, i) => (
+                <Link href={item.slug} key={i}>
+                  <DropdownMenuItem>{item.description}</DropdownMenuItem>
+                </Link>
+              ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem>Add New</DropdownMenuItem>
           </DropdownMenuGroup>
