@@ -10,7 +10,7 @@ datasource db {
 
 model item_types {
   id          Int     @id @default(autoincrement())
-  slug        String  @db.VarChar(255)
+  slug        String  @db.VarChar(255) @unique
   description String?
   items       items[]
 }
