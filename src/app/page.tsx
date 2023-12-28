@@ -17,7 +17,7 @@ export default async function Home() {
     <main className="flex min-h-screen items-center flex-col p-24">
       <div className="flex justify-center items-center">
         <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="50" className="text-white text-lg">
+          <text x="0" y="50" className="text-lg">
             <textPath href="#curve" className="fill-current">
               Tashan&apos;s + Christina&apos;s Favorites
             </textPath>
