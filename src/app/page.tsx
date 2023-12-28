@@ -44,7 +44,7 @@ export default async function Home() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             {itemTypes.map((item, i) => (
-              <Link href={item.name} key={i}>
+              <Link href={item.slug} key={i}>
                 <DropdownMenuItem>{item.description}</DropdownMenuItem>
               </Link>
             ))}

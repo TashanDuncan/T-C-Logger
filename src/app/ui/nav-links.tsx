@@ -1,13 +1,9 @@
 "use client";
 import Link from "next/link";
-import clsx from "clsx";
-import { fetchItemTypes } from "@/app/lib/data";
 import HomeNavLink from "./components/home-nav-link";
 import { Button } from "./components/ui/button";
-import { headers } from "next/headers";
-import { JSXElementConstructor, useEffect, useState } from "react";
-import { item_types } from "@prisma/client";
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function NavLinks({ links }: { links: JSX.Element[] }) {
   const [linkList] = useState<any[]>(links);
