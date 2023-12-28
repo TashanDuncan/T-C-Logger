@@ -6,7 +6,7 @@ import { ThemeToggle } from "./components/theme-toggle";
 
 export default async function SideNav() {
   const res = await fetchItemTypes();
-  const itemTypeLinks = res.map((i, index) => (
+  const itemTypeLinks = res?.map((i) => (
     <Link
       key={i.id}
       href={i.slug}
@@ -14,7 +14,7 @@ export default async function SideNav() {
         "flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
       }
     >
-      <p className="hidden md:block">{i.description}</p>
+      <p>{i.description}</p>
     </Link>
   ));
 
@@ -33,7 +33,7 @@ export default async function SideNav() {
         />
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        <NavLinks links={itemTypeLinks} />
+        {itemTypeLinks && <NavLinks links={itemTypeLinks} />}
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
         <span>Signed in as Tashan</span>
         <div className="flex justify-between">
