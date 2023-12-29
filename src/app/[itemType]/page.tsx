@@ -1,5 +1,5 @@
 import { fetchItems, fetchItemsByType } from "@/app/lib/data";
-import { getRatingValue } from "@/app/lib/utils";
+import { RatingValue, getRatingValue } from "@/app/lib/utils";
 import {
   Avatar,
   AvatarFallback,
@@ -20,6 +20,7 @@ import {
 import { PencilLineIcon, Trash2Icon } from "lucide-react";
 import { tags } from "@prisma/client";
 import { CreateItem } from "../ui/buttons/create-item";
+import RatingOptions from "../ui/components/rating-options";
 
 export default async function Page() {
   const headersList = headers();
@@ -47,6 +48,8 @@ export default async function Page() {
 
             const userItem = user_items[0];
             const partnerItem = user_items[1];
+            const { rating: userRating } = userItem || 0;
+            const { rating: partnerRating } = partnerItem || 0;
             return (
               <TableRow key={item.id}>
                 <TableCell>{item.title}</TableCell>
@@ -75,8 +78,16 @@ export default async function Page() {
                     </div>
                   )}
                 </TableCell>
-                <TableCell>{getRatingValue(userItem.rating)}</TableCell>
-                <TableCell>{getRatingValue(partnerItem.rating)}</TableCell>
+                <TableCell>
+                  {userRating
+                    ? getRatingValue(userItem.rating)
+                    : RatingValue.NoRating}
+                </TableCell>
+                <TableCell>
+                  {partnerRating
+                    ? getRatingValue(partnerItem.rating)
+                    : RatingValue.NoRating}
+                </TableCell>
                 <TableCell>{getRatingValue(item.avgRating)}</TableCell>
                 <TableCell>
                   <div className="flex space-x-4 justify-start align-top">
