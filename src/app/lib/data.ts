@@ -42,9 +42,9 @@ export async function fetchItems() {
 }
 
 export async function fetchItemTypes() {
-  noStore();
   try {
     const itemTypes = await prisma.item_types.findMany();
+    itemTypes.sort((a, b) => a.description.localeCompare(b.description));
     await prisma.$disconnect();
     return itemTypes;
   } catch (error) {
