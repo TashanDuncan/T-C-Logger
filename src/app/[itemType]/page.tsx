@@ -1,4 +1,4 @@
-import { fetchItems, fetchItemsByType } from "@/app/lib/data";
+import { fetchItemsByType } from "@/app/lib/data";
 import { RatingValue, getRatingValue } from "@/app/lib/utils";
 import {
   Avatar,

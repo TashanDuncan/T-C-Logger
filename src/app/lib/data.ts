@@ -43,8 +43,9 @@ export async function fetchItems() {
 
 export async function fetchItemTypes() {
   try {
-    const itemTypes = await prisma.item_categories.findMany();
-    itemTypes.sort((a, b) => a.description.localeCompare(b.description));
+    const itemTypes = await prisma.item_categories.findMany({
+      orderBy: { description: 'asc' },
+    });
     await prisma.$disconnect();
     return itemTypes;
   } catch (error) {
