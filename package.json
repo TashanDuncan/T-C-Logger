@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node -r dotenv/config ./scripts/seed.js"
+    "seed": "node -r dotenv/config ./scripts/seed.js",
+    "migrate:postgres": "dotenv -e .env.development -- npx prisma migrate deploy"
+
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
@@ -22,6 +24,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
     "framer-motion": "^10.16.16",
     "lucide-react": "^0.300.0",
     "next": "14.0.4",
