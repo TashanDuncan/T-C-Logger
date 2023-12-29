@@ -10,7 +10,6 @@
     "lint": "next lint",
     "seed": "node -r dotenv/config ./scripts/seed.js",
     "migrate:postgres": "dotenv -e .env.development -- npx prisma migrate deploy"
-
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
@@ -44,6 +43,10 @@
     "postcss": "^8",
     "prisma": "^5.7.1",
     "tailwindcss": "^3.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }

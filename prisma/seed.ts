@@ -1,0 +1,185 @@
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+async function main() {
+  //create 2 users
+  const tashan = await prisma.users.upsert({
+    where: { email: "tashan@test.com" },
+    update: {},
+    create: {
+      id: 1,
+      email: "tashan@test.com",
+      name: "Tashan",
+      password: "password",
+    },
+  });
+  const christina = await prisma.users.upsert({
+    where: { email: "christina@test.com" },
+    update: {},
+    create: {
+      id: 2,
+      email: "christina@test.com",
+      name: "Christina",
+      password: "password2",
+    },
+  });
+  // make both users partners
+
+  await prisma.users.update({
+    where: { id: 1 },
+    data: {
+      partner_id: 2,
+    },
+  });
+  await prisma.users.update({
+    where: { id: 2 },
+    data: {
+      partner_id: 1,
+    },
+  });
+
+  // create item categories
+
+  const tvShows = await prisma.item_categories.create({
+    data: {
+      slug: "tv-shows",
+      description: "TV Shows",
+    },
+  });
+  const movies = await prisma.item_categories.create({
+    data: {
+      slug: "movies",
+      description: "Movies",
+    },
+  });
+  const books = await prisma.item_categories.create({
+    data: {
+      slug: "books",
+      description: "Books",
+    },
+  });
+  const music = await prisma.item_categories.create({
+    data: {
+      slug: "music",
+      description: "Music",
+    },
+  });
+  const games = await prisma.item_categories.create({
+    data: {
+      slug: "games",
+      description: "Games",
+    },
+  });
+  const places = await prisma.item_categories.create({
+    data: {
+      slug: "places",
+      description: "Places",
+    },
+  });
+  const restaurants = await prisma.item_categories.create({
+    data: {
+      slug: "restaurants",
+      description: "Restaurants",
+    },
+  });
+
+  const activities = await prisma.item_categories.create({
+    data: {
+      slug: "activities",
+      description: "Activities",
+    },
+  });
+
+  // create items
+  const item1 = await prisma.items.create({
+    data: {
+      category_id: 1,
+      title: "The Office",
+      description: "A show about nothing",
+      created_by: 1,
+      // link: 'https://www.netflix.com/title/70136120',
+    },
+  });
+  const item2 = await prisma.items.create({
+    data: {
+      category_id: 1,
+      title: "Parks and Recreation",
+      description: "A show about nothing",
+      created_by: 1,
+    },
+  });
+  const item3 = await prisma.items.create({
+    data: {
+      category_id: 5,
+      title: "GTA",
+      description: "A Game",
+      created_by: 2,
+    },
+  });
+  const item4 = await prisma.items.create({
+    data: {
+      category_id: 5,
+      title: "Call of Duty",
+      description: "A Game",
+      created_by: 2,
+    },
+  });
+
+  //create user_items
+  const user_item1 = await prisma.user_items.create({
+    data: {
+      user_id: 1,
+      item_id: 1,
+      rating: 5,
+      experienced: true,
+    },
+  });
+  const user_item2 = await prisma.user_items.create({
+    data: {
+      user_id: 1,
+      item_id: 2,
+      rating: 8,
+      experienced: true,
+    },
+  });
+  const user_item3 = await prisma.user_items.create({
+    data: {
+      user_id: 2,
+      item_id: 3,
+      rating: 5,
+      experienced: true,
+    },
+  });
+  const user_item4 = await prisma.user_items.create({
+    data: {
+      user_id: 2,
+      item_id: 4,
+      rating: 8,
+      experienced: true,
+    },
+  });
+
+  console.log({
+    users: { tashan, christina },
+    item_categories: {
+      tvShows,
+      movies,
+      books,
+      music,
+      games,
+      places,
+      restaurants,
+      activities,
+    },
+    items: { item1, item2, item3, item4 },
+    user_items: { user_item1, user_item2, user_item3, user_item4 },
+  });
+}
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
