@@ -1,0 +1,9 @@
+services:
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432  # enables connecting locally via psql
+    environment:
+      POSTGRES_DB: tc_webapp_dev
+      POSTGRES_HOST_AUTH_METHOD: trust
