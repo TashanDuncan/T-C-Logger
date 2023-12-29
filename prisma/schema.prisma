@@ -8,7 +8,7 @@ datasource db {
   // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model item_types {
+model item_categories {
   id          Int     @id @default(autoincrement())
   slug        String  @unique @db.VarChar(255)
   description String
@@ -24,7 +24,7 @@ model items {
   created_by  Int
   created_at  DateTime     @db.Date
   users       users        @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  item_types  item_types   @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  item_categories  item_categories   @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   user_items  user_items[]
 }
 
