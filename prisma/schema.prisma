@@ -16,16 +16,16 @@ model item_categories {
 }
 
 model items {
-  id          Int          @id @default(autoincrement())
-  title       String       @db.VarChar(255)
-  description String?
-  type_id     Int
-  tags        tags[]
-  created_by  Int
-  created_at  DateTime     @db.Date
-  users       users        @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  item_categories  item_categories   @relation(fields: [type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user_items  user_items[]
+  id              Int             @id @default(autoincrement())
+  title           String          @db.VarChar(255)
+  description     String?
+  category_id     Int
+  tags            tags[]
+  created_by      Int
+  created_at      DateTime        @db.Date
+  users           users           @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  item_categories item_categories @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_items      user_items[]
 }
 
 model user_items {
