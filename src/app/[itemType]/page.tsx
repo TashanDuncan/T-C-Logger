@@ -66,7 +66,7 @@ export default async function Page() {
                       </Avatar>
                     </div>
                   )}
-                  {partnerItem.experienced && (
+                  {partnerItem && partnerItem.experienced && (
                     <div>
                       <Avatar>
                         <AvatarImage src="/christina.png" />
