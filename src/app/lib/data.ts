@@ -43,7 +43,7 @@ export async function fetchItems() {
 
 export async function fetchItemTypes() {
   try {
-    const itemTypes = await prisma.item_types.findMany();
+    const itemTypes = await prisma.item_categories.findMany();
     itemTypes.sort((a, b) => a.description.localeCompare(b.description));
     await prisma.$disconnect();
     return itemTypes;
@@ -55,7 +55,7 @@ export async function fetchItemTypes() {
 export async function fetchItemsByType(type: string) {
   noStore();
   try {
-    const itemTypes = await prisma.item_types.findUnique({
+    const itemTypes = await prisma.item_categories.findUnique({
       where: { slug: type },
       include: {
         items: {
