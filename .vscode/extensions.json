@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "prisma.prisma"
+        "prisma.prisma",
+        "yoavbls.pretty-ts-errors"
     ]
 }
