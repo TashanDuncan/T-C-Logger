@@ -19,8 +19,7 @@ function calculateAvgRating(
     const ratings = item.userItems.map(
       (user_item: UserItem) => user_item.rating
     );
-    const avgRating =
-      ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length;
+    const avgRating = ratings.length === 2 ? ratings[0] + ratings[1] / 2 : 0;
     return { ...item, avgRating };
   });
 }
