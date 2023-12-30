@@ -10,24 +10,21 @@ import {
 import { Button } from "./ui/components/ui/button";
 import Link from "next/link";
 import { fetchItemTypes } from "./lib/data";
+import Image from "next/image";
 
 export default async function Home() {
   const itemTypes = await fetchItemTypes();
   return (
     <main className="flex min-h-screen items-center flex-col p-24">
       <div className="flex justify-center items-center">
-        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="50" className="text-lg">
-            <textPath href="#curve" className="fill-current">
-              Tashan&apos;s + Christina&apos;s Favorites
-            </textPath>
-          </text>
-          <path
-            id="curve"
-            d="M10 80 Q 120 10 240 80"
-            className="stroke-current text-black"
-          />
-        </svg>
+   <Link className="my-2 flex h-20 items-end justify-start rounded-md p=4 md:h-40"
+   href="/">
+    <Image src="/wlt.png"
+    height={300}
+    width={400}
+    alt="logo"
+    />
+   </Link>
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
