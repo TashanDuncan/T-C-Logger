@@ -8,28 +8,30 @@ datasource db {
   // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model item_categories {
+model ItemCategory {
   id          Int      @id @default(autoincrement())
   slug        String   @unique @db.VarChar(255)
   description String
   created_at  DateTime @default(now())
-  items       items[]
+  items       Item[]
+	@@map("item_categories")
 }
 
-model items {
+model Item {
   id              Int             @id @default(autoincrement())
   title           String          @db.VarChar(255)
   description     String?
   category_id     Int
-  tags            tags[]
+  tags            Tag[]
   created_by      Int
   created_at      DateTime        @default(now())
-  users           users           @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  item_categories item_categories @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user_items      user_items[]
+  users           User           @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  item_categories ItemCategory @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_items      UserItem[]
+	@@map("items")
 }
 
-model user_items {
+model UserItem {
   id          Int      @id @default(autoincrement())
   user_id     Int
   item_id     Int
@@ -37,25 +39,28 @@ model user_items {
   experienced Boolean  @default(false)
   review      String?
   created_at  DateTime @default(now())
-  items       items    @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users       users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  items       Item    @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+	@@map("user_items")
 }
 
-model users {
+model User {
   id          Int          @id
   name        String       @db.VarChar(255)
   email       String       @unique
   partner_id  Int?
   password    String
-  items       items[]
-  user_items  user_items[]
-  users       users?       @relation("usersTousers", fields: [partner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  other_users users[]      @relation("usersTousers")
+  items       Item[]
+  user_items  UserItem[]
+  users       User?       @relation("usersTousers", fields: [partner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_users User[]      @relation("usersTousers")
+	@@map("users")
 }
 
-model tags {
+model Tag {
   id         Int      @id @default(autoincrement())
   name       String
-  posts      items[]
+  posts      Item[]
   created_at DateTime @default(now())
+	@@map("tags")
 }
