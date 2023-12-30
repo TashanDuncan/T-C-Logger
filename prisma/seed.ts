@@ -96,6 +96,13 @@ async function main() {
       title: "The Office",
       description: "A show about nothing",
       created_by: 1,
+      tags: {
+        create: [
+          {
+            name: "Comedy",
+          },
+        ],
+      },
       // link: 'https://www.netflix.com/title/70136120',
     },
   });
@@ -113,14 +120,31 @@ async function main() {
       title: "GTA",
       description: "A Game",
       created_by: 2,
+      tags: {
+        create: [
+          {
+            name: "Action",
+          },
+        ],
+      },
     },
   });
   const item4 = await prisma.items.create({
     data: {
       category_id: 5,
-      title: "Call of Duty",
+      title: "Final Fantasy",
       description: "A Game",
       created_by: 2,
+      tags: {
+        create: [
+          {
+            name: "Adventure",
+          },
+          {
+            name: "RPG",
+          },
+        ],
+      },
     },
   });
 
@@ -158,6 +182,15 @@ async function main() {
     },
   });
 
+  const user_item5 = await prisma.user_items.create({
+    data: {
+      user_id: 1,
+      item_id: 4,
+      rating: 10,
+      experienced: true,
+    },
+  });
+
   console.log({
     users: { tashan, christina },
     item_categories: {
@@ -171,7 +204,13 @@ async function main() {
       activities,
     },
     items: { item1, item2, item3, item4 },
-    user_items: { user_item1, user_item2, user_item3, user_item4 },
+    user_items: {
+      user_item1,
+      user_item2,
+      user_item3,
+      user_item4,
+      user_item5,
+    },
   });
 }
 main()
