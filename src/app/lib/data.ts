@@ -30,27 +30,6 @@ async function handleDatabaseError(error: unknown) {
   throw new Error("Failed to fetch item data.");
 }
 
-// export async function fetchItems() {
-//   noStore();
-//   try {
-//     const items = await prisma.items.findMany({
-//       include: {
-//         tags: true,
-//         user_items: {
-//           where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
-//         },
-//       },
-//     });
-
-//     const itemsWithAvgRating = calculateAvgRating(items);
-
-//     await prisma.$disconnect();
-//     return itemsWithAvgRating;
-//   } catch (error) {
-//     await handleDatabaseError(error);
-//   }
-// }
-
 export async function fetchItemTypes() {
   try {
     const itemTypes = await prisma.itemCategory.findMany({
