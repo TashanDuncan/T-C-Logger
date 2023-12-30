@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/app/ui/components/ui/table";
 import { PencilLineIcon, Trash2Icon } from "lucide-react";
-import { tags } from "@prisma/client";
+import { Tag } from "@prisma/client";
 import { CreateItem } from "../ui/buttons/create-item";
 
 export default async function Page() {
@@ -50,7 +50,7 @@ export default async function Page() {
               <TableRow key={item.id}>
                 <TableCell>{item.title}</TableCell>
                 <TableCell className="hidden md:table-cell">
-                  {tags.map((tag: tags) => (
+                  {tags.map((tag: Tag) => (
                     <Badge key={tag.id} className="mx-2">
                       {tag.name}
                     </Badge>

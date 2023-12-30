@@ -1,16 +1,16 @@
 import {
   PrismaClient,
-  items,
-  tags,
-  user_items,
+  Item,
+  Tag,
+  UserItem,
 } from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
 
 const prisma = new PrismaClient();
 
-interface ItemWithRelationships extends items {
-  user_items: user_items[];
-  tags: tags[];
+interface ItemWithRelationships extends Item {
+  user_items: UserItem[];
+  tags: Tag[];
 }
 
 interface ItemWithAvgRating extends ItemWithRelationships {
@@ -22,7 +22,7 @@ function calculateAvgRating(
 ): ItemWithAvgRating[] {
   return items.map((item) => {
     const ratings = item.user_items.map(
-      (user_item: user_items) => user_item.rating
+      (user_item: UserItem) => user_item.rating
     );
     const avgRating =
       ratings.reduce((a: number, b: number) => a + b, 0) / ratings.length;
@@ -59,7 +59,7 @@ async function handleDatabaseError(error: unknown) {
 
 export async function fetchItemTypes() {
   try {
-    const itemTypes = await prisma.item_categories.findMany({
+    const itemTypes = await prisma.itemCategory.findMany({
       orderBy: { description: "asc" },
     });
     await prisma.$disconnect();
@@ -72,7 +72,7 @@ export async function fetchItemTypes() {
 export async function fetchItemsByType(type: string) {
   noStore();
   try {
-    const itemTypes = await prisma.item_categories.findUnique({
+    const itemTypes = await prisma.itemCategory.findUnique({
       where: { slug: type },
       include: {
         items: {
