@@ -15,16 +15,9 @@ import Image from "next/image";
 export default async function Home() {
   const itemTypes = await fetchItemTypes();
   return (
-    <main className="flex min-h-screen items-center flex-col p-24">
+    <main className="flex min-h-screen justify-center items-center flex-col p-24">
       <div className="flex justify-center items-center">
-   <Link className="my-2 flex h-20 items-end justify-start rounded-md p=4 md:h-40"
-   href="/">
-    <Image src="/wlt.png"
-    height={300}
-    width={400}
-    alt="logo"
-    />
-   </Link>
+        <Image src="/wlt.png" height={300} width={400} alt="website logo" />
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -47,6 +40,19 @@ export default async function Home() {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
+      <div className="mt-auto w-full flex justify-end text-center">
+        <span className="inline-flex items-center mr-3">Our Playlist</span>
+        <a href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f" target="_blank">
+          <Button variant="outline">
+            <Image
+              src={"/spotifyicon.png"}
+              alt="Spotify Icon"
+              width={30}
+              height={30}
+            />
+          </Button>
+        </a>
+      </div>
     </main>
   );
 }
