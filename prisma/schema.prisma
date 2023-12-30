@@ -12,55 +12,60 @@ model ItemCategory {
   id          Int      @id @default(autoincrement())
   slug        String   @unique @db.VarChar(255)
   description String
-  created_at  DateTime @default(now())
+  created     DateTime @default(now()) @map("created_at")
   items       Item[]
-	@@map("item_categories")
+
+  @@map("item_categories")
 }
 
 model Item {
-  id              Int             @id @default(autoincrement())
-  title           String          @db.VarChar(255)
-  description     String?
-  category_id     Int
-  tags            Tag[]
-  created_by      Int
-  created_at      DateTime        @default(now())
-  users           User           @relation(fields: [created_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  item_categories ItemCategory @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user_items      UserItem[]
-	@@map("items")
+  id           Int          @id @default(autoincrement())
+  title        String       @db.VarChar(255)
+  description  String?
+  categoryId   Int          @map("category_id")
+  tags         Tag[]
+  createdBy    Int          @map("created_by")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  users        User         @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  itemCategory ItemCategory @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userItems    UserItem[]
+
+  @@map("items")
 }
 
 model UserItem {
   id          Int      @id @default(autoincrement())
-  user_id     Int
-  item_id     Int
+  userId      Int      @map("user_id")
+  itemId      Int      @map("item_id")
   rating      Int
   experienced Boolean  @default(false)
   review      String?
-  created_at  DateTime @default(now())
-  items       Item    @relation(fields: [item_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users       User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-	@@map("user_items")
+  created     DateTime @default(now()) @map("created_at")
+  items       Item     @relation(fields: [itemId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("user_items")
 }
 
 model User {
-  id          Int          @id
-  name        String       @db.VarChar(255)
-  email       String       @unique
-  partner_id  Int?
-  password    String
-  items       Item[]
-  user_items  UserItem[]
-  users       User?       @relation("usersTousers", fields: [partner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  other_users User[]      @relation("usersTousers")
-	@@map("users")
+  id         Int        @id
+  name       String     @db.VarChar(255)
+  email      String     @unique
+  partnerId  Int?       @map("partner_id")
+  password   String
+  items      Item[]
+  userItems  UserItem[]
+  users      User?      @relation("usersTousers", fields: [partnerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  otherUsers User[]     @relation("usersTousers")
+
+  @@map("users")
 }
 
 model Tag {
-  id         Int      @id @default(autoincrement())
-  name       String
-  posts      Item[]
-  created_at DateTime @default(now())
-	@@map("tags")
+  id      Int      @id @default(autoincrement())
+  name    String
+  posts   Item[]
+  created DateTime @default(now()) @map("created_at")
+
+  @@map("tags")
 }

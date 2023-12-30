@@ -43,9 +43,9 @@ export default async function Page() {
         </TableHeader>
         <TableBody>
           {items?.map((item) => {
-            const { tags, user_items } = item;
-            const userItem = user_items.find((item) => item.user_id === 1);
-            const partnerItem = user_items.find((item) => item.user_id === 2);
+            const { tags, userItems } = item;
+            const userItem = userItems.find((item) => item.userId === 1);
+            const partnerItem = userItems.find((item) => item.userId === 2);
             return (
               <TableRow key={item.id}>
                 <TableCell>{item.title}</TableCell>
@@ -58,20 +58,19 @@ export default async function Page() {
                 </TableCell>
                 <TableCell className="hidden md:table-cell">
                   <div className="flex flex-wrap">
-                  {userItem?.experienced && (
-                    <Avatar  className="mx-2">
-                      <AvatarImage src="/tashan.jpg" />
-                      <AvatarFallback>TD</AvatarFallback>
-                    </Avatar>
-                  )}
-                  {partnerItem?.experienced && (
-                    <Avatar  className="mx-2">
-                      <AvatarImage src="/christina.png" />
-                      <AvatarFallback>CV</AvatarFallback>
-                    </Avatar>
-                  )}     
+                    {userItem?.experienced && (
+                      <Avatar className="mx-2">
+                        <AvatarImage src="/tashan.jpg" />
+                        <AvatarFallback>TD</AvatarFallback>
+                      </Avatar>
+                    )}
+                    {partnerItem?.experienced && (
+                      <Avatar className="mx-2">
+                        <AvatarImage src="/christina.png" />
+                        <AvatarFallback>CV</AvatarFallback>
+                      </Avatar>
+                    )}
                   </div>
-
                 </TableCell>
                 <TableCell>{getRatingValue(userItem?.rating ?? 0)}</TableCell>
                 <TableCell>

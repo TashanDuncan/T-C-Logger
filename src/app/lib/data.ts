@@ -1,15 +1,10 @@
-import {
-  PrismaClient,
-  Item,
-  Tag,
-  UserItem,
-} from "@prisma/client";
+import { PrismaClient, Item, Tag, UserItem } from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
 
 const prisma = new PrismaClient();
 
 interface ItemWithRelationships extends Item {
-  user_items: UserItem[];
+  userItems: UserItem[];
   tags: Tag[];
 }
 
@@ -21,7 +16,7 @@ function calculateAvgRating(
   items: ItemWithRelationships[]
 ): ItemWithAvgRating[] {
   return items.map((item) => {
-    const ratings = item.user_items.map(
+    const ratings = item.userItems.map(
       (user_item: UserItem) => user_item.rating
     );
     const avgRating =
@@ -78,8 +73,8 @@ export async function fetchItemsByType(type: string) {
         items: {
           include: {
             tags: true,
-            user_items: {
-              where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
+            userItems: {
+              where: { OR: [{ userId: 1 }, { userId: 2 }] },
             },
           },
         },
