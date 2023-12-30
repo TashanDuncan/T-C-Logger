@@ -56,23 +56,22 @@ export default async function Page() {
                     </Badge>
                   ))}
                 </TableCell>
-                <TableCell className="hidden md:flex space-x-5">
+                <TableCell className="hidden md:table-cell space-x-5">
+                  <div className="flex flex-wrap">
                   {userItem?.experienced && (
-                    <div>
-                      <Avatar>
-                        <AvatarImage src="/tashan.jpg" />
-                        <AvatarFallback>TD</AvatarFallback>
-                      </Avatar>
-                    </div>
+                    <Avatar  className="mx-2">
+                      <AvatarImage src="/tashan.jpg" />
+                      <AvatarFallback>TD</AvatarFallback>
+                    </Avatar>
                   )}
                   {partnerItem?.experienced && (
-                    <div>
-                      <Avatar>
-                        <AvatarImage src="/christina.png" />
-                        <AvatarFallback>CV</AvatarFallback>
-                      </Avatar>
-                    </div>
-                  )}
+                    <Avatar  className="mx-2">
+                      <AvatarImage src="/christina.png" />
+                      <AvatarFallback>CV</AvatarFallback>
+                    </Avatar>
+                  )}     
+                  </div>
+
                 </TableCell>
                 <TableCell>{getRatingValue(userItem?.rating ?? 0)}</TableCell>
                 <TableCell>
