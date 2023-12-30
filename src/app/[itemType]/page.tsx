@@ -18,9 +18,8 @@ import {
   TableRow,
 } from "@/app/ui/components/ui/table";
 import { PencilLineIcon, Trash2Icon } from "lucide-react";
-import { tags } from "@prisma/client";
+import { tags, user_items } from "@prisma/client";
 import { CreateItem } from "../ui/buttons/create-item";
-import RatingOptions from "../ui/components/rating-options";
 
 export default async function Page() {
   const headersList = headers();
@@ -45,11 +44,8 @@ export default async function Page() {
         <TableBody>
           {items?.map((item) => {
             const { tags, user_items } = item;
-
-            const userItem = user_items[0];
-            const partnerItem = user_items[1];
-            const { rating: userRating } = userItem || 0;
-            const { rating: partnerRating } = partnerItem || 0;
+            const userItem = user_items.find((item) => item.user_id === 1);
+            const partnerItem = user_items.find((item) => item.user_id === 2);
             return (
               <TableRow key={item.id}>
                 <TableCell>{item.title}</TableCell>
@@ -61,7 +57,7 @@ export default async function Page() {
                   ))}
                 </TableCell>
                 <TableCell className="hidden md:flex space-x-5">
-                  {userItem.experienced && (
+                  {userItem?.experienced && (
                     <div>
                       <Avatar>
                         <AvatarImage src="/tashan.jpg" />
@@ -69,7 +65,7 @@ export default async function Page() {
                       </Avatar>
                     </div>
                   )}
-                  {partnerItem && partnerItem.experienced && (
+                  {partnerItem?.experienced && (
                     <div>
                       <Avatar>
                         <AvatarImage src="/christina.png" />
@@ -78,15 +74,9 @@ export default async function Page() {
                     </div>
                   )}
                 </TableCell>
+                <TableCell>{getRatingValue(userItem?.rating ?? 0)}</TableCell>
                 <TableCell>
-                  {userRating
-                    ? getRatingValue(userItem.rating)
-                    : RatingValue.NoRating}
-                </TableCell>
-                <TableCell>
-                  {partnerRating
-                    ? getRatingValue(partnerItem.rating)
-                    : RatingValue.NoRating}
+                  {getRatingValue(partnerItem?.rating ?? 0)}
                 </TableCell>
                 <TableCell>{getRatingValue(item.avgRating)}</TableCell>
                 <TableCell>

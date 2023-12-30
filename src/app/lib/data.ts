@@ -1,9 +1,25 @@
-import { PrismaClient, items, user_items } from "@prisma/client";
+import {
+  PrismaClient,
+  item_categories,
+  items,
+  tags,
+  user_items,
+} from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
 
 const prisma = new PrismaClient();
 
-function calculateAvgRating(items: any[]) {
+interface ItemWithRelationships extends items {
+  user_items: user_items[];
+  tags: tags[];
+}
+
+interface ItemWithAvgRating extends ItemWithRelationships {
+  avgRating: number;
+}
+function calculateAvgRating(
+  items: ItemWithRelationships[]
+): ItemWithAvgRating[] {
   return items.map((item) => {
     const ratings = item.user_items.map(
       (user_item: user_items) => user_item.rating
@@ -20,31 +36,31 @@ async function handleDatabaseError(error: unknown) {
   throw new Error("Failed to fetch item data.");
 }
 
-export async function fetchItems() {
-  noStore();
-  try {
-    const items = await prisma.items.findMany({
-      include: {
-        tags: true,
-        user_items: {
-          where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
-        },
-      },
-    });
+// export async function fetchItems() {
+//   noStore();
+//   try {
+//     const items = await prisma.items.findMany({
+//       include: {
+//         tags: true,
+//         user_items: {
+//           where: { OR: [{ user_id: 1 }, { user_id: 2 }] },
+//         },
+//       },
+//     });
 
-    const itemsWithAvgRating = calculateAvgRating(items);
+//     const itemsWithAvgRating = calculateAvgRating(items);
 
-    await prisma.$disconnect();
-    return itemsWithAvgRating;
-  } catch (error) {
-    await handleDatabaseError(error);
-  }
-}
+//     await prisma.$disconnect();
+//     return itemsWithAvgRating;
+//   } catch (error) {
+//     await handleDatabaseError(error);
+//   }
+// }
 
 export async function fetchItemTypes() {
   try {
     const itemTypes = await prisma.item_categories.findMany({
-      orderBy: { description: 'asc' },
+      orderBy: { description: "asc" },
     });
     await prisma.$disconnect();
     return itemTypes;
@@ -69,12 +85,14 @@ export async function fetchItemsByType(type: string) {
         },
       },
     });
-    let itemsWithAvgRating;
+    let itemsWithAvgRating: ItemWithAvgRating[] = [];
     if (itemTypes) {
       itemsWithAvgRating = calculateAvgRating(itemTypes.items);
+      await prisma.$disconnect();
+      return itemsWithAvgRating;
+    } else {
+      return [];
     }
-    await prisma.$disconnect();
-    return itemsWithAvgRating;
   } catch (error) {
     await handleDatabaseError(error);
   }
