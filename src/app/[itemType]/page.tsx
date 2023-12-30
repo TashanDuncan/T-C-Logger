@@ -56,7 +56,7 @@ export default async function Page() {
                     </Badge>
                   ))}
                 </TableCell>
-                <TableCell className="hidden md:table-cell space-x-5">
+                <TableCell className="hidden md:table-cell">
                   <div className="flex flex-wrap">
                   {userItem?.experienced && (
                     <Avatar  className="mx-2">
