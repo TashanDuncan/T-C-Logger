@@ -24,10 +24,10 @@ function calculateAvgRating(
   });
 }
 
-async function handleDatabaseError(error: unknown) {
+async function handleDatabaseError(error: unknown, dataType?: string) {
   console.error("Database Error:", error);
   await prisma.$disconnect();
-  throw new Error("Failed to fetch item data.");
+  throw new Error(`Failed to fetch ${dataType || ""} data.`);
 }
 
 export async function fetchItemTypes() {
@@ -38,7 +38,7 @@ export async function fetchItemTypes() {
     await prisma.$disconnect();
     return itemTypes;
   } catch (error) {
-    await handleDatabaseError(error);
+    await handleDatabaseError(error, "item type");
   }
 }
 
@@ -67,6 +67,6 @@ export async function fetchItemsByType(type: string) {
       return [];
     }
   } catch (error) {
-    await handleDatabaseError(error);
+    await handleDatabaseError(error, "items");
   }
 }
