@@ -1,5 +1,5 @@
 import { fetchItemsByType } from "@/app/lib/data";
-import { RatingValue, getRatingValue } from "@/app/lib/utils";
+import { getRatingValue } from "@/app/lib/utils";
 import {
   Avatar,
   AvatarFallback,
@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/app/ui/components/ui/table";
 import { PencilLineIcon, Trash2Icon } from "lucide-react";
-import { tags, user_items } from "@prisma/client";
+import { tags } from "@prisma/client";
 import { CreateItem } from "../ui/buttons/create-item";
 
 export default async function Page() {

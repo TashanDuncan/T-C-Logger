@@ -1,6 +1,5 @@
 import {
   PrismaClient,
-  item_categories,
   items,
   tags,
   user_items,
@@ -17,6 +16,7 @@ interface ItemWithRelationships extends items {
 interface ItemWithAvgRating extends ItemWithRelationships {
   avgRating: number;
 }
+
 function calculateAvgRating(
   items: ItemWithRelationships[]
 ): ItemWithAvgRating[] {

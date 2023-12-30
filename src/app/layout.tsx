@@ -1,4 +1,3 @@
-import SideNav from "@/app/ui/sidenav";
 import type { Metadata } from "next";
 import { Nunito_Sans as FontSans } from "next/font/google";
 import "./globals.css";
