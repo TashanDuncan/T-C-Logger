@@ -11,14 +11,16 @@ import { Button } from "./ui/components/ui/button";
 import Link from "next/link";
 import { fetchItemTypes } from "./lib/data";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import Logo from "./logo";
+import { ThemeToggle } from "./ui/components/theme-toggle";
 
 export default async function Home() {
   const itemTypes = await fetchItemTypes();
   return (
     <main className="flex min-h-screen justify-center items-center flex-col p-24">
-      <div className="flex justify-center items-center">
-        <Image src="/wlt.png" height={300} width={400} alt="website logo" />
-      </div>
+      <Logo />
+      <ThemeToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline">Menu</Button>
@@ -42,7 +44,10 @@ export default async function Home() {
       </DropdownMenu>
       <div className="mt-auto w-full flex justify-end text-center">
         <span className="inline-flex items-center mr-3">Our Playlist</span>
-        <a href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f" target="_blank">
+        <a
+          href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
+          target="_blank"
+        >
           <Button variant="outline">
             <Image
               src={"/spotifyicon.png"}
