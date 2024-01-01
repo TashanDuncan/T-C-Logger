@@ -20,6 +20,8 @@ import {
 import { PencilLineIcon, Trash2Icon } from "lucide-react";
 import { Tag } from "@prisma/client";
 import { CreateItem } from "../ui/buttons/create-item";
+import { DeleteItem } from "../ui/delete-item";
+import { Button } from "../ui/components/ui/button";
 
 export default async function Page() {
   const headersList = headers();
@@ -78,10 +80,10 @@ export default async function Page() {
                 </TableCell>
                 <TableCell>{getRatingValue(item.avgRating)}</TableCell>
                 <TableCell>
-                  <div className="flex space-x-4 justify-start align-top">
-                    <PencilLineIcon className="hover:text-blue-600 shrink-0 w-4 h-4 md:w-5 md:h-5" />
-                    <Trash2Icon className="hover:text-blue-600 shrink-0 w-4 h-4 md:w-5 md:h-5" />
-                  </div>
+                    <Button variant="outline" className="hover:text-blue-600 mx-2">
+                      <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
+                    </Button>
+                    <DeleteItem item={item} />
                 </TableCell>
               </TableRow>
             );

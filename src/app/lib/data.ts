@@ -3,12 +3,12 @@ import { unstable_noStore as noStore } from "next/cache";
 
 const prisma = new PrismaClient();
 
-interface ItemWithRelationships extends Item {
+export interface ItemWithRelationships extends Item {
   userItems: UserItem[];
   tags: Tag[];
 }
 
-interface ItemWithAvgRating extends ItemWithRelationships {
+export interface ItemWithAvgRating extends ItemWithRelationships {
   avgRating: number;
 }
 
