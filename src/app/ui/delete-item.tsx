@@ -13,12 +13,11 @@ import {
   AlertDialogTrigger,
 } from "./components/ui/alert-dialog";
 import { ItemWithAvgRating } from "../lib/data";
-
-const ContinueButton = () => {
-  
-}
+import { deleteItem } from "../lib/actions";
 
 export function DeleteItem({ item }: { item: ItemWithAvgRating }) {
+  const deleteItemWithId = deleteItem.bind(null, item.id);
+
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -38,7 +37,9 @@ export function DeleteItem({ item }: { item: ItemWithAvgRating }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <form action={deleteItemWithId}>
+            <AlertDialogAction type="submit">Continue</AlertDialogAction>
+          </form>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
