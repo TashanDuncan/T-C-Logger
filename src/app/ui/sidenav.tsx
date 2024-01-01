@@ -5,16 +5,16 @@ import { fetchItemCategories } from "../lib/data";
 import { ThemeToggle } from "./components/theme-toggle";
 
 export default async function SideNav() {
-  const res = await fetchItemCategories();
-  const itemTypeLinks = res?.map((i) => (
+  const itemCategories = await fetchItemCategories();
+  const itemCategoryLinks = itemCategories?.map((category) => (
     <Link
-      key={i.id}
-      href={`/${i.slug}`}
+      key={category.id}
+      href={`/${category.slug}`}
       className={
         "flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
       }
     >
-      <p>{i.description}</p>
+      <p>{category.description}</p>
     </Link>
   ));
 
@@ -33,7 +33,7 @@ export default async function SideNav() {
         />
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        {itemTypeLinks && <NavLinks links={itemTypeLinks} />}
+        {itemCategoryLinks && <NavLinks links={itemCategoryLinks} />}
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
         <span>Signed in as Tashan</span>
         <div className="flex justify-between">
