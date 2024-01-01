@@ -1,11 +1,11 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/nav-links";
 import Image from "next/image";
-import { fetchItemTypes } from "../lib/data";
+import { fetchItemCategories } from "../lib/data";
 import { ThemeToggle } from "./components/theme-toggle";
 
 export default async function SideNav() {
-  const res = await fetchItemTypes();
+  const res = await fetchItemCategories();
   const itemTypeLinks = res?.map((i) => (
     <Link
       key={i.id}

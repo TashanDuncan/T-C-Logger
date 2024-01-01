@@ -9,14 +9,14 @@ import {
 } from "./ui/components/ui/dropdown-menu";
 import { Button } from "./ui/components/ui/button";
 import Link from "next/link";
-import { fetchItemTypes } from "./lib/data";
+import { fetchItemCategories } from "./lib/data";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import Logo from "./logo";
 import { ThemeToggle } from "./ui/components/theme-toggle";
 
 export default async function Home() {
-  const itemTypes = await fetchItemTypes();
+  const itemCategories = await fetchItemCategories();
   return (
     <main className="flex min-h-screen justify-center items-center flex-col p-24">
       <Logo />
@@ -29,8 +29,8 @@ export default async function Home() {
           <DropdownMenuLabel>Our Favourites</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {itemTypes &&
-              itemTypes.map((item, i) => (
+            {itemCategories &&
+              itemCategories.map((item, i) => (
                 <Link href={item.slug} key={i}>
                   <DropdownMenuItem>{item.description}</DropdownMenuItem>
                 </Link>

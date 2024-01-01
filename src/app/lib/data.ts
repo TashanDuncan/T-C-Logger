@@ -30,13 +30,13 @@ async function handleDatabaseError(error: unknown, dataType?: string) {
   throw new Error(`Failed to fetch ${dataType || ""} data.`);
 }
 
-export async function fetchItemTypes() {
+export async function fetchItemCategories() {
   try {
-    const itemTypes = await prisma.itemCategory.findMany({
+    const itemCategories = await prisma.itemCategory.findMany({
       orderBy: { description: "asc" },
     });
     await prisma.$disconnect();
-    return itemTypes;
+    return itemCategories;
   } catch (error) {
     await handleDatabaseError(error, "item type");
   }
@@ -45,7 +45,7 @@ export async function fetchItemTypes() {
 export async function fetchItemsByType(type: string) {
   noStore();
   try {
-    const itemTypes = await prisma.itemCategory.findUnique({
+    const itemCategory = await prisma.itemCategory.findUnique({
       where: { slug: type },
       include: {
         items: {
@@ -59,8 +59,8 @@ export async function fetchItemsByType(type: string) {
       },
     });
     let itemsWithAvgRating: ItemWithAvgRating[] = [];
-    if (itemTypes) {
-      itemsWithAvgRating = calculateAvgRating(itemTypes.items);
+    if (itemCategory) {
+      itemsWithAvgRating = calculateAvgRating(itemCategory.items);
       await prisma.$disconnect();
       return itemsWithAvgRating;
     } else {
