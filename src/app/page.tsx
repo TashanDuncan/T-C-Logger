@@ -58,6 +58,9 @@ export default async function Home() {
           </Button>
         </a>
       </div>
+      <Link href={"/about-us"}>
+        <Button variant="outline">About Us</Button>
+      </Link>
     </main>
   );
 }
