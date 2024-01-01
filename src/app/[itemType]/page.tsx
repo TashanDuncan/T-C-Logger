@@ -26,12 +26,17 @@ import { Button } from "../ui/components/ui/button";
 export default async function Page() {
   const headersList = headers();
   const activePath = await headersList.get("next-url");
-  const items = await fetchItemsByType(activePath?.replace("/", "") || "");
+  const itemCategory = activePath?.replace("/", "");
+  const items = await fetchItemsByType(itemCategory || "");
 
   return (
     <>
       <Table className="table-fixed">
-        <TableCaption>A list of your items.</TableCaption>
+        <TableCaption>
+          {items && items?.length > 0
+            ? "A list of your items."
+            : `No ${itemCategory} Found`}
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -80,10 +85,13 @@ export default async function Page() {
                 </TableCell>
                 <TableCell>{getRatingValue(item.avgRating)}</TableCell>
                 <TableCell>
-                    <Button variant="outline" className="hover:text-blue-600 mx-2">
-                      <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
-                    </Button>
-                    <DeleteItem item={item} />
+                  <Button
+                    variant="outline"
+                    className="hover:text-blue-600 mx-2"
+                  >
+                    <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
+                  </Button>
+                  <DeleteItem item={item} />
                 </TableCell>
               </TableRow>
             );
