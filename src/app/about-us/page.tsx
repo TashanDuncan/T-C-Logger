@@ -1,3 +1,9 @@
+import Logo from "../logo";
+
 export default function Page() {
-    return (<><h1>about us</h1></>)
-    }
+  return (
+    <div className="relative flex object-left-top">
+      <Logo />
+    </div>
+  );
+}
