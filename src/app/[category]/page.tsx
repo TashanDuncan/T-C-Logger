@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/ui/components/ui/table";
-import { PencilLineIcon, Trash2Icon } from "lucide-react";
+import { PencilLineIcon } from "lucide-react";
 import { Tag } from "@prisma/client";
 import { CreateItem } from "../ui/buttons/create-item";
 import { DeleteItem } from "../ui/delete-item";
