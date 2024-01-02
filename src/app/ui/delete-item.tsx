@@ -31,8 +31,8 @@ export function DeleteItem({ item }: { item: ItemWithAvgRating }) {
             Are you absolutely sure you want to delete {item.title}?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete{" "}
+            {item.title} and remove and your partners review from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
