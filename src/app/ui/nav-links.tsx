@@ -7,20 +7,20 @@ import { HomeIcon } from "lucide-react";
 
 export default function NavLinks({ links }: { links: JSX.Element[] }) {
   const [linkList] = useState<JSX.Element[]>(links);
-  const pathname = usePathname();
+  const currentCategory = `/${usePathname().split("/")[1]}`;
   const router = useRouter();
 
   useEffect(() => {
-    const activeCategory = linkList.find((link) => {
-      return link.props.href === pathname;
+    const activeCategoryLink = linkList.find((link) => {
+      return link.props.href === currentCategory;
     });
 
-    if (activeCategory) {
-      activeCategory.props.className =
+    if (activeCategoryLink) {
+      activeCategoryLink.props.className =
         "text-blue-600 flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3";
     }
     router.refresh();
-  }, [pathname, linkList, router]);
+  }, [currentCategory, linkList, router]);
   return (
     <>
       <Link
@@ -28,7 +28,7 @@ export default function NavLinks({ links }: { links: JSX.Element[] }) {
         className={clsx(
           "flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
           {
-            "text-blue-600": pathname === "/",
+            "text-blue-600": currentCategory === "/",
           }
         )}
       >
