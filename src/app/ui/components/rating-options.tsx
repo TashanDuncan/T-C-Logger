@@ -32,6 +32,7 @@ export default function RatingOptions(props: RatingOptionsProps) {
           <SelectItem value="3">(3) Very Bad</SelectItem>
           <SelectItem value="2">(2) Horrible</SelectItem>
           <SelectItem value="1">(1) Appalling</SelectItem>
+          <SelectItem value="0">No Rating</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
