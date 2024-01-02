@@ -8,9 +8,15 @@ import {
   SelectValue,
 } from "./ui/select";
 
-export default function RatingOptions(rating: number) {
+interface RatingOptionsProps {
+  onChange: (...event: any[]) => void;
+  value: any;
+  disabled?: boolean | undefined;
+  name: "rating";
+}
+export default function RatingOptions(props: RatingOptionsProps) {
   return (
-    <Select defaultValue={rating.toString()}>
+    <Select onValueChange={props.onChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a rating" />
       </SelectTrigger>
