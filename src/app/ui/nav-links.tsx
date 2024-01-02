@@ -8,7 +8,6 @@ import { HomeIcon } from "lucide-react";
 export default function NavLinks({ links }: { links: JSX.Element[] }) {
   const [linkList] = useState<JSX.Element[]>(links);
   const currentCategory = `/${usePathname().split("/")[1]}`;
-  const router = useRouter();
 
   useEffect(() => {
     const activeCategoryLink = linkList.find((link) => {
@@ -19,8 +18,7 @@ export default function NavLinks({ links }: { links: JSX.Element[] }) {
       activeCategoryLink.props.className =
         "text-blue-600 flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3";
     }
-    router.refresh();
-  }, [currentCategory, linkList, router]);
+  }, [currentCategory, linkList]);
   return (
     <>
       <Link
