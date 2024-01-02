@@ -1,10 +1,17 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
+export function convertToSlug(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
+}
 
 export enum RatingValue {
   Appalling = "(1) Appalling",
@@ -46,3 +53,35 @@ export function getRatingValue(rating: number) {
       return RatingValue.NoRating;
   }
 }
+
+const FormSchema = z.object({
+  id: z.string(),
+  title: z.string({
+    invalid_type_error: "Please select a title.",
+  }),
+  description: z
+    .string({
+      invalid_type_error: "Please select a description.",
+    })
+    .optional(),
+  rating: z.coerce
+    .number()
+    .int()
+    .gte(0)
+    .lte(10, "Rating must be between 0 and 10.")
+    .optional(),
+  experienced: z.boolean({
+    invalid_type_error: "Please select a valid experienced value.",
+  }),
+  category: z.string({
+    invalid_type_error: "Please select a valid category.",
+  }),
+  review: z
+    .string({
+      invalid_type_error: "Please select a valid review.",
+    })
+    .optional(),
+  date: z.string(),
+});
+
+export const CreateItemSchema = FormSchema.omit({ id: true, date: true });

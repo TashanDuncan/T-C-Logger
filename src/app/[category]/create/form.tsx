@@ -1,5 +1,7 @@
 "use client";
 
+import { createItem } from "@/app/lib/actions";
+import { z } from "zod";
 import RatingOptions from "@/app/ui/components/rating-options";
 import { Button } from "@/app/ui/components/ui/button";
 import { Checkbox } from "@/app/ui/components/ui/checkbox";
@@ -22,21 +24,34 @@ import {
   SelectValue,
 } from "@/app/ui/components/ui/select";
 import { Textarea } from "@/app/ui/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ItemCategory } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { CreateItemSchema } from "@/app/lib/utils";
 
-function onSubmit(values: any) {
+async function onSubmit(values: z.infer<typeof CreateItemSchema>) {
   console.log(values);
+  await createItem(values);
 }
 export default function CreateItemForm({
   categories,
 }: {
   categories: ItemCategory[];
 }) {
-  const form = useForm();
   const currentCategory = usePathname().split("/")[1];
+  const form = useForm<z.infer<typeof CreateItemSchema>>({
+    resolver: zodResolver(CreateItemSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      rating: 0,
+      experienced: false,
+      category: currentCategory,
+      review: "",
+    },
+  });
 
   useEffect(() => {
     form.setValue("category", currentCategory);
@@ -110,7 +125,6 @@ export default function CreateItemForm({
                 <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  {...field}
                 />
               </FormControl>
               <FormMessage />
@@ -130,7 +144,6 @@ export default function CreateItemForm({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Category</SelectLabel>
                       {categories.map((category) => (
                         <SelectItem key={category.id} value={category.slug}>
                           {category.description}
