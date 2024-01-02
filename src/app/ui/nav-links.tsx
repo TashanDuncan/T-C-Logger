@@ -12,7 +12,7 @@ export default function NavLinks({ links }: { links: JSX.Element[] }) {
 
   useEffect(() => {
     const activeCategory = linkList.find((link) => {
-      return `/${link.props.href}` === pathname;
+      return link.props.href === pathname;
     });
 
     if (activeCategory) {
