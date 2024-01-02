@@ -32,7 +32,8 @@ export function DeleteItem({ item }: { item: ItemWithAvgRating }) {
           </AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete{" "}
-            {item.title} and remove and your partners review from our servers.
+            {item.title} and remove you and your partners review from our
+            servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
