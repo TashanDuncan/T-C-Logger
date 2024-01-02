@@ -23,7 +23,7 @@ export default async function ItemsTable({ query }: { query: string }) {
     <Table className="table-fixed">
       <TableCaption>
         {items && items?.length > 0
-          ? "A list of your items."
+          ? `A list of your ${query}.`
           : `No ${query} Found`}
       </TableCaption>
       <TableHeader>
