@@ -1,5 +1,3 @@
-import { headers } from "next/headers";
-
 import { CreateItem } from "../ui/buttons/create-item";
 import ItemsTable from "../ui/item-table";
 
