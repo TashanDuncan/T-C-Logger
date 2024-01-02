@@ -19,7 +19,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/app/ui/components/ui/select";
@@ -27,7 +26,6 @@ import { Textarea } from "@/app/ui/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ItemCategory } from "@prisma/client";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { CreateItemSchema } from "@/app/lib/utils";
 
@@ -44,17 +42,9 @@ export default function CreateItemForm({
   const form = useForm<z.infer<typeof CreateItemSchema>>({
     resolver: zodResolver(CreateItemSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      rating: 0,
-      experienced: false,
       category: currentCategory,
-      review: "",
+      experienced: false,
     },
-  });
-
-  useEffect(() => {
-    form.setValue("category", currentCategory);
   });
 
   return (
