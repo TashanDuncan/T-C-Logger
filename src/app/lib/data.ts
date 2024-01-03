@@ -16,9 +16,9 @@ function calculateAvgRating(
   items: ItemWithRelationships[]
 ): ItemWithAvgRating[] {
   return items.map((item) => {
-    const ratings = item.userItems.map(
-      (user_item: UserItem) => user_item.rating
-    );
+    const ratings = item.userItems.filter(
+      (user_item: UserItem) => user_item.rating > 0
+    ).map((user_item: UserItem) => user_item.rating);
     const avgRating =
       ratings.length === 2 ? Math.round((ratings[0] + ratings[1]) / 2) : 0;
     return { ...item, avgRating };
