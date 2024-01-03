@@ -55,7 +55,7 @@ export function getRatingValue(rating: number) {
 }
 
 const FormSchema = z.object({
-  id: z.string(),
+  id: z.number().int(),
   title: z.string({
     invalid_type_error: "Please select a title.",
   }),
@@ -85,3 +85,9 @@ const FormSchema = z.object({
 });
 
 export const CreateItemSchema = FormSchema.omit({ id: true, date: true });
+export const UserItemSchema = FormSchema.omit({
+  title: true,
+  description: true,
+  date: true,
+  category: true,
+});
