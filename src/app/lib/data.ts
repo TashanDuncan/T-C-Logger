@@ -63,11 +63,38 @@ export async function fetchItemsByType(type: string) {
     if (itemCategory) {
       itemsWithAvgRating = calculateAvgRating(itemCategory.items);
       await prisma.$disconnect();
+
       return itemsWithAvgRating;
     } else {
+      await prisma.$disconnect();
       return [];
     }
   } catch (error) {
+    await prisma.$disconnect();
     await handleDatabaseError(error, "items");
+  }
+}
+
+export async function fetchItemById(id: number) {
+  try {
+    const item = await prisma.item.findUnique({
+      where: { id },
+      include: {
+        tags: true,
+        userItems: {
+          where: { OR: [{ userId: 1 }, { userId: 2 }] },
+        },
+      },
+    });
+    let itemWithAvgRating: ItemWithAvgRating = {} as ItemWithAvgRating;
+    if (item) {
+      itemWithAvgRating = calculateAvgRating([item])[0];
+    }
+    await prisma.$disconnect();
+    return itemWithAvgRating;
+  } catch (error) {
+    await prisma.$disconnect();
+
+    await handleDatabaseError(error, "item");
   }
 }
