@@ -13,10 +13,11 @@ interface RatingOptionsProps {
   value: any;
   disabled?: boolean | undefined;
   name: "rating";
+  defaultValue?: string;
 }
 export default function RatingOptions(props: RatingOptionsProps) {
   return (
-    <Select onValueChange={props.onChange}>
+    <Select onValueChange={props.onChange} defaultValue={props.defaultValue} disabled={props.disabled}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a rating" />
       </SelectTrigger>
