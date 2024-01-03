@@ -109,10 +109,11 @@ export default function CreateItemForm({
           control={form.control}
           name="experienced"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md  py-4">
+            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md  py-4">
               <FormLabel>Experienced</FormLabel>
               <FormControl>
                 <Checkbox
+                  className="w-6 h-6"
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
