@@ -5,7 +5,6 @@ import Image from "next/image";
 
 export default function Logo() {
   const { theme } = useTheme();
-  console.log(theme);
   return (
     <div className="flex justify-center items-center">
       {theme === "light" && (
