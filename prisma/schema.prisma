@@ -34,7 +34,6 @@ model Item {
 }
 
 model UserItem {
-  id          Int      @id @default(autoincrement())
   userId      Int      @map("user_id")
   itemId      Int      @map("item_id")
   rating      Int
@@ -44,6 +43,7 @@ model UserItem {
   items       Item     @relation(fields: [itemId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users       User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
+  @@unique([userId, itemId])
   @@map("user_items")
 }
 
