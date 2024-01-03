@@ -15,6 +15,7 @@ import { Tag } from "@prisma/client";
 import { fetchItemsByType } from "../lib/data";
 import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar";
 import { Badge } from "./components/ui/badge";
+import Link from "next/link";
 
 export default async function ItemsTable({ query }: { query: string }) {
   const items = await fetchItemsByType(query);
@@ -72,9 +73,15 @@ export default async function ItemsTable({ query }: { query: string }) {
               <TableCell>{getRatingValue(partnerItem?.rating ?? 0)}</TableCell>
               <TableCell>{getRatingValue(item.avgRating)}</TableCell>
               <TableCell>
-                <Button variant="outline" className="hover:text-blue-600 mx-2">
-                  <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
-                </Button>
+                <Link href={`/${query}/${item.id.toString()}`}>
+                  <Button
+                    variant="outline"
+                    className="hover:text-blue-600 mx-2"
+                  >
+                    <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
+                  </Button>
+                </Link>
+
                 <DeleteItem item={item} />
               </TableCell>
             </TableRow>
