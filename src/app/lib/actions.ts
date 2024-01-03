@@ -51,6 +51,7 @@ export async function createItem(data: z.infer<typeof CreateItemSchema>) {
               userId: 1,
               rating: validatedData.rating || 0,
               experienced: validatedData.experienced,
+              review: validatedData.review,
             },
           ],
         },
