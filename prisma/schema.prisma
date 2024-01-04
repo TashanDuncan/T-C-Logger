@@ -24,7 +24,7 @@ model Item {
   description  String?
   categoryId   Int          @map("category_id")
   tags         Tag[]
-  createdBy    Int          @map("created_by")
+  createdBy    String       @map("created_by")
   createdAt    DateTime     @default(now()) @map("created_at")
   users        User         @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
   itemCategory ItemCategory @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -34,7 +34,7 @@ model Item {
 }
 
 model UserItem {
-  userId      Int      @map("user_id")
+  userId      String   @map("user_id")
   itemId      Int      @map("item_id")
   rating      Int
   experienced Boolean  @default(false)
@@ -48,10 +48,10 @@ model UserItem {
 }
 
 model User {
-  id         Int        @id
+  id         String     @id @default(uuid())
   name       String     @db.VarChar(255)
   email      String     @unique
-  partnerId  Int?       @map("partner_id")
+  partnerId  String?    @map("partner_id")
   password   String
   items      Item[]
   userItems  UserItem[]

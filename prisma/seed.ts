@@ -6,7 +6,7 @@ async function main() {
     where: { email: "tashan@test.com" },
     update: {},
     create: {
-      id: 1,
+      id: "1",
       email: "tashan@test.com",
       name: "Tashan",
       password: "password",
@@ -16,7 +16,7 @@ async function main() {
     where: { email: "christina@test.com" },
     update: {},
     create: {
-      id: 2,
+      id: "2",
       email: "christina@test.com",
       name: "Christina",
       password: "password2",
@@ -25,15 +25,15 @@ async function main() {
   // make both users partners
 
   await prisma.user.update({
-    where: { id: 1 },
+    where: { id: "1" },
     data: {
-      partnerId: 2,
+      partnerId: "2",
     },
   });
   await prisma.user.update({
-    where: { id: 2 },
+    where: { id: "2" },
     data: {
-      partnerId: 1,
+      partnerId: "1",
     },
   });
 
@@ -95,7 +95,7 @@ async function main() {
       categoryId: 1,
       title: "The Office",
       description: "A show about nothing",
-      createdBy: 1,
+      createdBy: "1",
       tags: {
         create: [
           {
@@ -111,7 +111,7 @@ async function main() {
       categoryId: 1,
       title: "Parks and Recreation",
       description: "A show about nothing",
-      createdBy: 1,
+      createdBy: "1",
     },
   });
   const item3 = await prisma.item.create({
@@ -119,7 +119,7 @@ async function main() {
       categoryId: 5,
       title: "GTA",
       description: "A Game",
-      createdBy: 2,
+      createdBy: "2",
       tags: {
         create: [
           {
@@ -134,7 +134,7 @@ async function main() {
       categoryId: 5,
       title: "Final Fantasy",
       description: "A Game",
-      createdBy: 2,
+      createdBy: "2",
       tags: {
         create: [
           {
@@ -151,7 +151,7 @@ async function main() {
   //create user_items
   const user_item1 = await prisma.userItem.create({
     data: {
-      userId: 1,
+      userId: "1",
       itemId: 1,
       rating: 5,
       experienced: true,
@@ -159,7 +159,7 @@ async function main() {
   });
   const user_item2 = await prisma.userItem.create({
     data: {
-      userId: 1,
+      userId: "1",
       itemId: 2,
       rating: 8,
       experienced: true,
@@ -167,7 +167,7 @@ async function main() {
   });
   const user_item3 = await prisma.userItem.create({
     data: {
-      userId: 2,
+      userId: "2",
       itemId: 3,
       rating: 5,
       experienced: true,
@@ -175,7 +175,7 @@ async function main() {
   });
   const user_item4 = await prisma.userItem.create({
     data: {
-      userId: 2,
+      userId: "2",
       itemId: 4,
       rating: 8,
       experienced: true,
@@ -184,7 +184,7 @@ async function main() {
 
   const user_item5 = await prisma.userItem.create({
     data: {
-      userId: 1,
+      userId: "1",
       itemId: 4,
       rating: 10,
       experienced: true,
