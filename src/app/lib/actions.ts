@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { CreateItemSchema, UserItemSchema } from "./utils";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 import { z } from "zod";
 
 const prisma = new PrismaClient();
@@ -113,4 +115,23 @@ export async function createOrUpdateUserItem(
 
   revalidatePath(`/${category?.slug ?? "category"}/${validatedData.id}`);
   redirect(`/${category?.slug ?? "category"}/${validatedData.id}`);
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error;
+  }
 }
