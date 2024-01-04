@@ -3,8 +3,7 @@ import Image from "next/image";
 export default function Page() {
   return (
     <>
-      <h1>Tashan and Christina&apos;s Media Logger!</h1>
-
+      <h1>Login</h1>
       <div>
         <h1>Profiles</h1>
         <div>
