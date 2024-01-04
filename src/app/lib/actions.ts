@@ -44,11 +44,11 @@ export async function createItem(data: z.infer<typeof CreateItemSchema>) {
         title: validatedData.title,
         description: validatedData.description,
         categoryId: category.id,
-        createdBy: 1,
+        createdBy: "1",
         userItems: {
           create: [
             {
-              userId: 1,
+              userId: "1",
               rating: validatedData.rating || 0,
               experienced: validatedData.experienced,
               review: validatedData.review,
@@ -88,7 +88,7 @@ export async function createOrUpdateUserItem(
       data: {
         userItems: {
           upsert: {
-            where: { userId_itemId: { userId: 1, itemId: validatedData.id } },
+            where: { userId_itemId: { userId: "1", itemId: validatedData.id } },
             create: {
               rating: validatedData.rating || 0,
               experienced: validatedData.experienced,
