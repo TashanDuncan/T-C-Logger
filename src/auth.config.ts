@@ -9,8 +9,8 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOutsideLoginPage = nextUrl.pathname !== "/login";
       if (isOutsideLoginPage) {
-        // if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+        if (isLoggedIn) return true;
+        // return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
         return Response.redirect(new URL("/", nextUrl));
       }
