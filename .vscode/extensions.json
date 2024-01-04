@@ -3,6 +3,7 @@
         "prisma.prisma",
         "yoavbls.pretty-ts-errors",
         "bradlc.vscode-tailwindcss",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "aaron-bond.better-comments"
     ]
 }
