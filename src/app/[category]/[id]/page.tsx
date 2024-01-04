@@ -94,14 +94,16 @@ export default async function Page({
           <div className="flex flex-col items-center space-x-3 space-y-3 rounded-md  py-4 justify-center">
             <span className="text-sm font-bold dark:text-white">
               {partnerItem?.experienced
-                ? `{Partner} has Experienced ${item?.title}`
-                : `${item?.title} has yet to be Experienced by {Partner}`}
+                ? `{Partner} has experienced ${item?.title}`
+                : `{Partner} has not been experienced ${item?.title} yet!`}
             </span>
-            <Checkbox
-              className="w-6 h-6"
-              checked={partnerItem?.experienced}
-              disabled={true}
-            />
+            {partnerItem?.experienced && (
+              <Checkbox
+                className="w-6 h-6"
+                checked={partnerItem.experienced}
+                disabled={true}
+              />
+            )}
           </div>
           <div>
             <span className="text-sm font-bold dark:text-white">Rating</span>
