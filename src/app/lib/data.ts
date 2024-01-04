@@ -16,9 +16,9 @@ function calculateAvgRating(
   items: ItemWithRelationships[]
 ): ItemWithAvgRating[] {
   return items.map((item) => {
-    const ratings = item.userItems.filter(
-      (user_item: UserItem) => user_item.rating > 0
-    ).map((user_item: UserItem) => user_item.rating);
+    const ratings = item.userItems
+      .filter((user_item: UserItem) => user_item.rating > 0)
+      .map((user_item: UserItem) => user_item.rating);
     const avgRating =
       ratings.length === 2 ? Math.round((ratings[0] + ratings[1]) / 2) : 0;
     return { ...item, avgRating };
@@ -53,7 +53,7 @@ export async function fetchItemsByType(type: string) {
           include: {
             tags: true,
             userItems: {
-              where: { OR: [{ userId: 1 }, { userId: 2 }] },
+              where: { OR: [{ userId: "1" }, { userId: "2" }] },
             },
           },
         },
@@ -82,7 +82,7 @@ export async function fetchItemById(id: number) {
       include: {
         tags: true,
         userItems: {
-          where: { OR: [{ userId: 1 }, { userId: 2 }] },
+          where: { OR: [{ userId: "1" }, { userId: "2" }] },
         },
       },
     });

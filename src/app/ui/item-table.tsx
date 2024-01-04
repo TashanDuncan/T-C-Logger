@@ -41,8 +41,8 @@ export default async function ItemsTable({ query }: { query: string }) {
       <TableBody>
         {items?.map((item) => {
           const { tags, userItems } = item;
-          const userItem = userItems.find((item) => item.userId === 1);
-          const partnerItem = userItems.find((item) => item.userId === 2);
+          const userItem = userItems.find((item) => item.userId === "1");
+          const partnerItem = userItems.find((item) => item.userId === "2");
           return (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>

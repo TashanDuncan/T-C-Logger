@@ -25,8 +25,8 @@ export default async function Page({
   params: { id: string };
 }) {
   const item = await fetchItemById(parseInt(id));
-  const userItem = item?.userItems.find((item) => item.userId === 1);
-  const partnerItem = item?.userItems.find((item) => item.userId === 2);
+  const userItem = item?.userItems.find((item) => item.userId === "1");
+  const partnerItem = item?.userItems.find((item) => item.userId === "2");
 
   return (
     <>
