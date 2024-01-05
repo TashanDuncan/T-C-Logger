@@ -32,6 +32,7 @@ export default function UserReview({
     resolver: zodResolver(UserItemSchema),
     defaultValues: {
       id: userItem?.itemId,
+      userId: userItem?.userId,
       rating: userItem?.rating,
       review: userItem?.review ?? undefined,
       experienced: !!userItem?.experienced,

@@ -90,7 +90,7 @@ export async function createOrUpdateUserItem(
       data: {
         userItems: {
           upsert: {
-            where: { userId_itemId: { userId: "1", itemId: validatedData.id } },
+            where: { userId_itemId: { userId: validatedData.userId, itemId: validatedData.id } },
             create: {
               rating: validatedData.rating || 0,
               experienced: validatedData.experienced,
