@@ -12,7 +12,7 @@ import {
 } from "../ui/components/ui/table";
 import { DeleteItem } from "../ui/buttons/delete-item";
 import { Tag } from "@prisma/client";
-import { fetchItemsByType } from "../lib/data";
+import { fetchItemsByType, fetchUser } from "../lib/data";
 import {
   Avatar,
   AvatarFallback,
@@ -25,6 +25,7 @@ import { getCurrentUser } from "../lib/session";
 export default async function ItemsTable({ query }: { query: string }) {
   const items = await fetchItemsByType(query);
   const user = await getCurrentUser();
+  const partner = await fetchUser(user?.partnerId || "");
 
   return (
     <Table className="table-fixed">
@@ -48,7 +49,9 @@ export default async function ItemsTable({ query }: { query: string }) {
         {items?.map((item) => {
           const { tags, userItems } = item;
           const userItem = userItems.find((item) => item.userId === user?.id);
-          const partnerItem = userItems.find((item) => item.userId === user?.partnerId);
+          const partnerItem = userItems.find(
+            (item) => item.userId === user?.partnerId
+          );
           return (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>
@@ -63,14 +66,18 @@ export default async function ItemsTable({ query }: { query: string }) {
                 <div className="flex flex-wrap">
                   {userItem?.experienced && (
                     <Avatar className="mx-2">
-                      <AvatarImage src="/tashan.jpg" />
-                      <AvatarFallback>TD</AvatarFallback>
+                      <AvatarImage src={user?.image || ""} />
+                      <AvatarFallback>
+                        {user?.name ? user?.name[0].toUpperCase() : "N/A"}
+                      </AvatarFallback>
                     </Avatar>
                   )}
                   {partnerItem?.experienced && (
                     <Avatar className="mx-2">
-                      <AvatarImage src="/christina.png" />
-                      <AvatarFallback>CV</AvatarFallback>
+                      <AvatarImage src={partner?.image || ""} />
+                      <AvatarFallback>
+                        {partner?.name[0].toUpperCase() ?? "N/A"}
+                      </AvatarFallback>
                     </Avatar>
                   )}
                 </div>

@@ -1,4 +1,4 @@
-import { fetchItemById } from "@/app/lib/data";
+import { fetchItemById, fetchUser } from "@/app/lib/data";
 import { getRatingValue } from "@/app/lib/utils";
 import RatingOptions from "@/app/ui/components/rating-options";
 import { Badge } from "@/app/ui/components/ui/badge";
@@ -27,6 +27,7 @@ export default async function Page({
 }) {
   const item = await fetchItemById(parseInt(id));
   const user = await getCurrentUser();
+  const partner = await fetchUser(user?.partnerId || "");
   const userItem = item?.userItems.find((item) => item.userId === user?.id);
   const partnerItem = item?.userItems.find(
     (item) => item.userId === user?.partnerId
@@ -72,8 +73,8 @@ export default async function Page({
       <div className="flex justify-around flex-wrap">
         <div className="flex flex-col w-[350px] my-6 items-center">
           <Image
-            src={"/tashan.jpg"}
-            alt="user"
+            src={user?.image || ""}
+            alt={user?.name || "user"}
             width={200}
             height={200}
             className="w-[200px] h-[200px]"
@@ -86,8 +87,8 @@ export default async function Page({
         <Separator className="md:hidden my-4" />
         <div className="flex flex-col w-[350px] my-6 items-center">
           <Image
-            src={"/christina.png"}
-            alt="partner"
+            src={partner?.image || ""}
+            alt={partner?.name || "partner"}
             width={200}
             height={200}
             className="w-[200px] h-[200px]"
