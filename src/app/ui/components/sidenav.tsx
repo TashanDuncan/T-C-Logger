@@ -1,8 +1,8 @@
 import Link from "next/link";
-import NavLinks from "@/app/ui/nav-links";
+import NavLinks from "@/app/ui/components/nav-links";
 import Image from "next/image";
-import { fetchItemCategories } from "../lib/data";
-import { ThemeToggle } from "./components/theme-toggle";
+import { fetchItemCategories } from "../../lib/data";
+import { ThemeToggle } from "./theme-toggle";
 
 export default async function SideNav() {
   const itemCategories = await fetchItemCategories();

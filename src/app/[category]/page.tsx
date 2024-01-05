@@ -1,5 +1,5 @@
 import { CreateItem } from "../ui/buttons/create-item";
-import ItemsTable from "../ui/item-table";
+import ItemsTable from "./item-table";
 
 export default async function Page({
   params: { category },

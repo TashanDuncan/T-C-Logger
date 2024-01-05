@@ -1,6 +1,6 @@
 import { PencilLineIcon } from "lucide-react";
 import { getRatingValue } from "../lib/utils";
-import { Button } from "./components/ui/button";
+import { Button } from "../ui/components/ui/button";
 import {
   Table,
   TableBody,
@@ -9,12 +9,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./components/ui/table";
-import { DeleteItem } from "./delete-item";
+} from "../ui/components/ui/table";
+import { DeleteItem } from "../ui/buttons/delete-item";
 import { Tag } from "@prisma/client";
 import { fetchItemsByType } from "../lib/data";
-import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar";
-import { Badge } from "./components/ui/badge";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "../ui/components/ui/avatar";
+import { Badge } from "../ui/components/ui/badge";
 import Link from "next/link";
 
 export default async function ItemsTable({ query }: { query: string }) {

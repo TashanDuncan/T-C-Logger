@@ -11,9 +11,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./components/ui/alert-dialog";
-import { ItemWithAvgRating } from "../lib/data";
-import { deleteItem } from "../lib/actions";
+} from "../components/ui/alert-dialog";
+import { ItemWithAvgRating } from "../../lib/data";
+import { deleteItem } from "../../lib/actions";
 
 export function DeleteItem({ item }: { item: ItemWithAvgRating }) {
   const deleteItemWithId = deleteItem.bind(null, item.id);
