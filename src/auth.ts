@@ -1,10 +1,20 @@
-import NextAuth from "next-auth";
+import NextAuth, { User } from "next-auth";
 import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
+import { Session } from "next-auth/types";
 //TODO: Hash password import bcrypt from "bcrypt";
 
+declare module "next-auth" {
+  interface Session {
+    user: User & {
+      picture?: string;
+      partnerId?: string;
+      password?: string;
+    };
+  }
+}
 const prisma = new PrismaClient();
 
 async function getUserByEmail(email: string) {
@@ -41,4 +51,17 @@ export const { auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      session.user = { ...(token.user as Session["user"]) };
+      delete session.user.password;
+      return session;
+    },
+  },
 });
