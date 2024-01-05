@@ -15,12 +15,15 @@ import {
 } from "../ui/components/ui/form";
 import { Input } from "../ui/components/ui/input";
 
-async function onSubmit(values: any) {
-  console.log(values);
-  await authenticate({ email: "tashan@test.com", ...values });
-}
-
-export default function LoginForm() {
+export default function LoginForm({
+  selectedProfile,
+}: {
+  selectedProfile: string;
+}) {
+  async function onSubmit(values: any) {
+    console.log({ email: selectedProfile, ...values });
+    await authenticate({ email: selectedProfile, ...values });
+  }
   const form = useForm({});
   return (
     <Form {...form}>
