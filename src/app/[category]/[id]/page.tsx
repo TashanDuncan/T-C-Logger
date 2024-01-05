@@ -50,7 +50,8 @@ export default async function Page({
           {item?.description}
         </h2>
         <span className="mb-4 text-sm  text-center font-normal text-gray-500 dark:text-gray-400">
-          Created on {item?.createdAt.toDateString()} by {creator?.name || "unknown"}
+          Created on {item?.createdAt.toDateString()} by{" "}
+          {creator?.name || "unknown"}
         </span>
       </div>
       <div className="flex justify-center space-x-3 flex-wrap">
@@ -81,7 +82,7 @@ export default async function Page({
           <h3 className="text-center text-3xl font-bold dark:text-white my-3">
             Your Review
           </h3>
-          <UserReview userItem={userItem} />
+          <UserReview userItem={userItem} userId={user?.id || ""} itemId={item?.id || 0}/>
         </div>
         <Separator className="md:hidden my-4" />
         <div className="flex flex-col w-[350px] my-6 items-center">

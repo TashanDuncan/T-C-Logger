@@ -90,12 +90,21 @@ export async function createOrUpdateUserItem(
       data: {
         userItems: {
           upsert: {
-            where: { userId_itemId: { userId: validatedData.userId, itemId: validatedData.id } },
+            where: {
+              userId_itemId: {
+                userId: validatedData.userId,
+                itemId: validatedData.id,
+              },
+            },
             create: {
               rating: validatedData.rating || 0,
               experienced: validatedData.experienced,
               review: validatedData.review,
-              users: {},
+              users: {
+                connect: {
+                  id: validatedData.userId,
+                },
+              },
             },
             update: {
               rating: validatedData.rating || 0,
@@ -117,9 +126,7 @@ export async function createOrUpdateUserItem(
   redirect(`/${category?.slug ?? "category"}/${validatedData.id}`);
 }
 
-export async function authenticate(
-  formData: FormData
-) {
+export async function authenticate(formData: FormData) {
   try {
     await signIn("credentials", formData);
   } catch (error) {
