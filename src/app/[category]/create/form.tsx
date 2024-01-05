@@ -28,6 +28,7 @@ import { ItemCategory } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { CreateItemSchema } from "@/app/lib/utils";
+import BackButton from "@/app/ui/buttons/back";
 
 async function onSubmit(values: z.infer<typeof CreateItemSchema>) {
   console.log(values);
@@ -164,7 +165,11 @@ export default function CreateItemForm({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div>
+          <Button type="submit" className="mr-3">Submit</Button>
+          <BackButton />
+        </div>
+
       </form>
     </Form>
   );

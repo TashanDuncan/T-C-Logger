@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Checkbox } from "@/app/ui/components/ui/checkbox";
 import { createOrUpdateUserItem } from "@/app/lib/actions";
-import { useSession } from "next-auth/react";
+import BackButton from "@/app/ui/buttons/back";
 
 async function onSubmit(values: z.infer<typeof UserItemSchema>) {
   console.log(values);
@@ -27,7 +27,7 @@ async function onSubmit(values: z.infer<typeof UserItemSchema>) {
 export default function UserReview({
   userItem,
   userId,
-  itemId
+  itemId,
 }: {
   userItem: UserItem | undefined;
   userId: string;
@@ -43,7 +43,7 @@ export default function UserReview({
       experienced: !!userItem?.experienced,
     },
   });
-  
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -93,9 +93,12 @@ export default function UserReview({
             </FormItem>
           )}
         />
-        <Button className="mt-3" type="submit">
-          Update
-        </Button>
+        <div className="mt-3">
+          <Button className="mr-3" type="submit">
+            Update
+          </Button>
+          <BackButton className="hidden md:inline-block"/>
+        </div>
       </form>
     </Form>
   );
