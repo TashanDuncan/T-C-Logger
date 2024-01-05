@@ -20,9 +20,11 @@ import {
 } from "../ui/components/ui/avatar";
 import { Badge } from "../ui/components/ui/badge";
 import Link from "next/link";
+import { getCurrentUser } from "../lib/session";
 
 export default async function ItemsTable({ query }: { query: string }) {
   const items = await fetchItemsByType(query);
+  const user = await getCurrentUser();
 
   return (
     <Table className="table-fixed">
@@ -45,8 +47,8 @@ export default async function ItemsTable({ query }: { query: string }) {
       <TableBody>
         {items?.map((item) => {
           const { tags, userItems } = item;
-          const userItem = userItems.find((item) => item.userId === "1");
-          const partnerItem = userItems.find((item) => item.userId === "2");
+          const userItem = userItems.find((item) => item.userId === user?.id);
+          const partnerItem = userItems.find((item) => item.userId === user?.partnerId);
           return (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>
