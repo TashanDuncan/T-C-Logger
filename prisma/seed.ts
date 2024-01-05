@@ -9,6 +9,7 @@ async function main() {
       id: "1",
       email: "tashan@test.com",
       name: "Tashan",
+      image: "/tashan.jpg",
       password: "password",
     },
   });
@@ -19,6 +20,7 @@ async function main() {
       id: "2",
       email: "christina@test.com",
       name: "Christina",
+      image: "/christina.png",
       password: "password2",
     },
   });

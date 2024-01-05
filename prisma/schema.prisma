@@ -52,6 +52,7 @@ model User {
   name       String     @db.VarChar(255)
   email      String     @unique
   partnerId  String?    @map("partner_id")
+  image      String?
   password   String
   items      Item[]
   userItems  UserItem[]
