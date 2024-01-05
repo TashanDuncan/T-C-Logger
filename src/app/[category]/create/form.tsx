@@ -35,13 +35,16 @@ async function onSubmit(values: z.infer<typeof CreateItemSchema>) {
 }
 export default function CreateItemForm({
   categories,
+  userId,
 }: {
   categories: ItemCategory[];
+  userId: string;
 }) {
   const currentCategory = usePathname().split("/")[1];
   const form = useForm<z.infer<typeof CreateItemSchema>>({
     resolver: zodResolver(CreateItemSchema),
     defaultValues: {
+      userId,
       category: currentCategory,
       experienced: false,
     },

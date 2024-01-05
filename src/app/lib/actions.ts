@@ -46,11 +46,11 @@ export async function createItem(data: z.infer<typeof CreateItemSchema>) {
         title: validatedData.title,
         description: validatedData.description,
         categoryId: category.id,
-        createdBy: "1",
+        createdBy: validatedData.userId,
         userItems: {
           create: [
             {
-              userId: "1",
+              userId: validatedData.userId,
               rating: validatedData.rating || 0,
               experienced: validatedData.experienced,
               review: validatedData.review,
