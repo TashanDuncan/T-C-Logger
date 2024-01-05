@@ -3,6 +3,7 @@ import NavLinks from "@/app/ui/components/nav-links";
 import Image from "next/image";
 import { fetchItemCategories } from "../../lib/data";
 import { ThemeToggle } from "./theme-toggle";
+import { signOut } from "@/auth";
 
 export default async function SideNav() {
   const itemCategories = await fetchItemCategories();
@@ -37,7 +38,12 @@ export default async function SideNav() {
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
         <span>Signed in as Tashan</span>
         <div className="flex justify-between">
-          <form>
+          <form
+            action={async () => {
+              "use server";
+              await signOut();
+            }}
+          >
             <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
               <div className="hidden md:block">Sign Out</div>
             </button>
