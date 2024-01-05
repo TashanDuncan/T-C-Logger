@@ -31,6 +31,18 @@ async function handleDatabaseError(error: unknown, dataType?: string) {
   throw new Error(`Failed to fetch ${dataType || ""} data.`);
 }
 
+export async function fetchUser(id: string){
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+    await prisma.$disconnect();
+    return user;
+  } catch (error) {
+    await handleDatabaseError(error, "user");
+  }
+}
+
 export async function fetchItemCategories() {
   try {
     const itemCategories = await prisma.itemCategory.findMany({
