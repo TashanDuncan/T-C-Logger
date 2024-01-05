@@ -8,8 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node -r dotenv/config ./scripts/seed.js",
-    "migrate:postgres": "dotenv -e .env.development -- npx prisma migrate deploy"
+    "seed": "prisma db seed",
+    "migrate:postgres": "dotenv -e .env.development -- npx prisma migrate deploy",
+    "reset:postgres": "prisma db push --force-reset && prisma db seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.3",
