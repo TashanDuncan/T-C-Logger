@@ -4,9 +4,11 @@ import Image from "next/image";
 import { fetchItemCategories } from "../../lib/data";
 import { ThemeToggle } from "./theme-toggle";
 import { signOut } from "@/auth";
+import { getCurrentUser } from "@/app/lib/session";
 
 export default async function SideNav() {
   const itemCategories = await fetchItemCategories();
+  const user = await getCurrentUser();
   const itemCategoryLinks = itemCategories?.map((category) => (
     <Link
       key={category.id}
@@ -36,7 +38,7 @@ export default async function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         {itemCategoryLinks && <NavLinks links={itemCategoryLinks} />}
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
-        <span>Signed in as Tashan</span>
+        <span>Signed in as {user?.name}</span>
         <div className="flex justify-between">
           <form
             action={async () => {
