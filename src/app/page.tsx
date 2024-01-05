@@ -11,7 +11,7 @@ import { Button } from "./ui/components/ui/button";
 import Link from "next/link";
 import { fetchItemCategories } from "./lib/data";
 import Image from "next/image";
-import Logo from "./logo";
+import Logo from "./ui/components/logo";
 import { ThemeToggle } from "./ui/components/theme-toggle";
 
 export default async function Home() {
