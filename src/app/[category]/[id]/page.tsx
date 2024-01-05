@@ -1,6 +1,5 @@
 import { fetchItemById, fetchUser } from "@/app/lib/data";
 import { getRatingValue } from "@/app/lib/utils";
-import RatingOptions from "@/app/ui/components/rating-options";
 import { Badge } from "@/app/ui/components/ui/badge";
 import {
   Card,
@@ -28,6 +27,7 @@ export default async function Page({
   const item = await fetchItemById(parseInt(id));
   const user = await getCurrentUser();
   const partner = await fetchUser(user?.partnerId || "");
+  const creator = await fetchUser(item?.createdBy || "");
   const userItem = item?.userItems.find((item) => item.userId === user?.id);
   const partnerItem = item?.userItems.find(
     (item) => item.userId === user?.partnerId
@@ -50,8 +50,7 @@ export default async function Page({
           {item?.description}
         </h2>
         <span className="mb-4 text-sm  text-center font-normal text-gray-500 dark:text-gray-400">
-          Created on {item?.createdAt.toDateString()} by User ID:
-          {item?.createdBy}
+          Created on {item?.createdAt.toDateString()} by {creator?.name || "unknown"}
         </span>
       </div>
       <div className="flex justify-center space-x-3 flex-wrap">
@@ -94,13 +93,15 @@ export default async function Page({
             className="w-[200px] h-[200px]"
           />
           <h3 className="text-center text-3xl font-bold dark:text-white my-3">
-            Partner Review
+            {`${partner?.name}'s` || "Partner"} Review
           </h3>
           <div className="flex flex-col items-center space-x-3 space-y-3 rounded-md  py-4 justify-center">
             <span className="text-sm font-bold dark:text-white">
               {partnerItem?.experienced
-                ? `{Partner} has experienced ${item?.title}`
-                : `{Partner} has not been experienced ${item?.title} yet!`}
+                ? `${partner?.name || "Partner"} has experienced ${item?.title}`
+                : `${partner?.name || "Partner"} has not been experienced ${
+                    item?.title
+                  } yet!`}
             </span>
             {partnerItem?.experienced && (
               <Checkbox
