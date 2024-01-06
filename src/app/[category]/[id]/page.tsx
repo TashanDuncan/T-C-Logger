@@ -41,7 +41,7 @@ export default async function Page({
         {item?.title}
       </h1>
       <BackButton
-        children={<MoveLeftIcon />}
+        showArrow={true}
         className="fixed top-0 left-0 mt-4 ml-4 md:hidden"
       />
       <div className="flex my-3 justify-center">

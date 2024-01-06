@@ -1,18 +1,22 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Button } from "../components/ui/button";
+import { MoveLeftIcon, ShowerHead } from "lucide-react";
 
 export default function BackButton({
-  children = "Back",
+  text = "Back",
   className,
+  showArrow,
 }: {
-  children?: string | JSX.Element;
+  text?: string;
   className?: string;
+  showArrow?: boolean;
 }) {
   const router = useRouter();
   return (
     <Button type="button" onClick={() => router.back()} className={className}>
-      {children}
+      {showArrow && <MoveLeftIcon />}
+      {text}
     </Button>
   );
 }
