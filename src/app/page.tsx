@@ -40,26 +40,31 @@ export default async function Home() {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="mt-auto w-full flex justify-end text-center">
-        <span className="inline-flex items-center mr-3">Our Playlist</span>
-        <a
-          href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
-          target="_blank"
-        >
-          <Button variant="outline">
-            <Image
-              src={"/spotifyicon.png"}
-              alt="Spotify Icon"
-              width={30}
-              height={30}
-            />
-          </Button>
-        </a>
+
+      <div className="mt-auto w-full flex justify-between text-center">
+        <Link href={"/about-us"}>
+          <Button variant="outline">About Us</Button>
+        </Link>
+        <div className="flex justify-center">
+          <span className="inline-flex items-center mr-3">Our Playlist</span>
+          <a
+            href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
+            target="_blank"
+          >
+            <Button variant="outline">
+              <Image
+                src={"/spotifyicon.png"}
+                alt="Spotify Icon"
+                width={30}
+                height={30}
+              />
+            </Button>
+          </a>
+        </div>
       </div>
-      <Link href={"/about-us"}>
-        <Button variant="outline">About Us</Button>
-      </Link>
-      <div className="flex justify-center flex-col p-24"> <ThemeToggle /> </div>
+      <div className="flex justify-center flex-col p-24">
+        <ThemeToggle />
+      </div>
     </main>
   );
 }
