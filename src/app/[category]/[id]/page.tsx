@@ -18,7 +18,6 @@ import {
   SelectValue,
 } from "@/app/ui/components/ui/select";
 import { getCurrentUser } from "@/app/lib/session";
-import BackArrow from "@/app/ui/buttons/back-arrow";
 import BackButton from "@/app/ui/buttons/back";
 import { MoveLeftIcon } from "lucide-react";
 
