@@ -1,8 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/app/lib/actions";
-import { ArrowRightIcon, KeyIcon } from "lucide-react";
+import { KeyIcon } from "lucide-react";
 import { Button } from "../ui/components/ui/button";
 import { useForm } from "react-hook-form";
 import {
@@ -41,7 +40,7 @@ export default function LoginForm({
   }
   const form = useForm({});
   return (
-    <div className="my-24">
+    <div className="absolute flex flex-col justify-center items-center top-[25%] w-full">
       <div className="flex justify-center items-center flex-col">
         <Image
           src={image || ""}

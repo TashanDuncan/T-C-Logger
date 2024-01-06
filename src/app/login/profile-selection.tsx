@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Button } from "../ui/components/ui/button";
 
 export default function ProfileSelection({
   setSelectedProfile,
@@ -6,9 +7,9 @@ export default function ProfileSelection({
   setSelectedProfile: any;
 }) {
   return (
-    <div>
-      <h1>Who are you?</h1>
-      <div>
+    <div className="absolute flex flex-col justify-center items-center top-[25%] w-full">
+      <h1 className="text-center font-extrabold text-xl my-4">Who are you?</h1>
+      <div className="flex justify-around items-center flex-wrap gap-8 text-center">
         <div>
           <Image
             src="/tashan.jpg"
@@ -17,7 +18,11 @@ export default function ProfileSelection({
             height={200}
             className="w-[200px] h-[200px] cursor-pointer"
             onClick={() =>
-              setSelectedProfile({ name: "Tashan", image: "/tashan.jpg", email: "tashan@test.com" })
+              setSelectedProfile({
+                name: "Tashan",
+                image: "/tashan.jpg",
+                email: "tashan@test.com",
+              })
             }
           />
           <span>Tashan</span>
@@ -30,7 +35,11 @@ export default function ProfileSelection({
             height={200}
             className="w-[200px] h-[200px] cursor-pointer"
             onClick={() =>
-              setSelectedProfile({ name: "Christina", image: "/christina.png", email: "chrstina@test.com" })
+              setSelectedProfile({
+                name: "Christina",
+                image: "/christina.png",
+                email: "chrstina@test.com",
+              })
             }
           />
           <span>Christina</span>
@@ -46,9 +55,7 @@ export default function ProfileSelection({
           <span>Guest</span>
         </div>
       </div>
-      <div>
-        <button>Manage Profiles</button>
-      </div>
+      <Button className="my-8">Manage Profiles</Button>
     </div>
   );
 }
