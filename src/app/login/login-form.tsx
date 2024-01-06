@@ -17,17 +17,19 @@ import { Input } from "../ui/components/ui/input";
 import BackButton from "../ui/buttons/back";
 import Image from "next/image";
 import { useToast } from "../ui/components/ui/use-toast";
+import { ProfileProps } from "./profiles";
 
 export default function LoginForm({
   selectedProfile,
 }: {
-  selectedProfile: string;
+  selectedProfile: ProfileProps;
 }) {
   const { toast } = useToast();
+  const { name, image, email } = selectedProfile;
 
   async function onSubmit(values: any) {
     const authFailures = await authenticate({
-      email: selectedProfile,
+      email,
       ...values,
     });
     if (authFailures) {
@@ -39,15 +41,16 @@ export default function LoginForm({
   }
   const form = useForm({});
   return (
-    <div className=" my-32">
-      <div className="flex justify-center">
+    <div className="my-24">
+      <div className="flex justify-center items-center flex-col">
         <Image
-          src={selectedProfile}
-          alt={selectedProfile}
+          src={image || ""}
+          alt={name}
           width={200}
           height={200}
           className="h-[200px] w-[200px]"
         />
+        <span className=" text-lg font-bold my-3">{name}</span>
       </div>
 
       <Form {...form}>
@@ -73,16 +76,7 @@ export default function LoginForm({
             )}
           />
           <div className="flex mt-3">
-            <Button
-              type="submit"
-              className="mr-3"
-              onClick={() => {
-                toast({
-                  title: "auth",
-                  description: "Please try again.",
-                });
-              }}
-            >
+            <Button type="submit" className="mr-3">
               <KeyIcon />
               Log In
             </Button>
@@ -91,15 +85,5 @@ export default function LoginForm({
         </form>
       </Form>
     </div>
-  );
-}
-
-function LoginButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button className="mt-4 w-full" aria-disabled={pending}>
-      Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-    </Button>
   );
 }

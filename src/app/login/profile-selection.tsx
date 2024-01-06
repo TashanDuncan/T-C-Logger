@@ -16,7 +16,9 @@ export default function ProfileSelection({
             width={200}
             height={200}
             className="w-[200px] h-[200px] cursor-pointer"
-            onClick={() => setSelectedProfile("/tashan.jpg")}
+            onClick={() =>
+              setSelectedProfile({ name: "Tashan", image: "/tashan.jpg", email: "tashan@test.com" })
+            }
           />
           <span>Tashan</span>
         </div>
@@ -27,7 +29,9 @@ export default function ProfileSelection({
             width={200}
             height={200}
             className="w-[200px] h-[200px] cursor-pointer"
-            onClick={() => setSelectedProfile("/christina.png")}
+            onClick={() =>
+              setSelectedProfile({ name: "Christina", image: "/christina.png", email: "chrstina@test.com" })
+            }
           />
           <span>Christina</span>
         </div>
