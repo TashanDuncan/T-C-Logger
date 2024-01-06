@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/app/ui/components/ui/select";
 import { getCurrentUser } from "@/app/lib/session";
+import BackArrow from "@/app/ui/buttons/back-arrow";
 
 export default async function Page({
   params: { id },
@@ -38,6 +39,7 @@ export default async function Page({
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
         {item?.title}
       </h1>
+      <BackArrow className="fixed top-0 left-0 mt-4 ml-4 md:hidden" />
       <div className="flex my-3 justify-center">
         {item?.tags.map((tag) => (
           <Badge key={tag.id} className="mx-2">
