@@ -14,40 +14,83 @@ import {
   FormMessage,
 } from "../ui/components/ui/form";
 import { Input } from "../ui/components/ui/input";
+import BackButton from "../ui/buttons/back";
+import Image from "next/image";
+import { useToast } from "../ui/components/ui/use-toast";
 
 export default function LoginForm({
   selectedProfile,
 }: {
   selectedProfile: string;
 }) {
+  const { toast } = useToast();
+
   async function onSubmit(values: any) {
-    console.log({ email: selectedProfile, ...values });
-    await authenticate({ email: selectedProfile, ...values });
+    const authFailures = await authenticate({
+      email: selectedProfile,
+      ...values,
+    });
+    if (authFailures) {
+      toast({
+        title: authFailures,
+        description: "Please try again.",
+      });
+    }
   }
   const form = useForm({});
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter password..."
-                  {...field}
-                  type="password"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <div className=" my-32">
+      <div className="flex justify-center">
+        <Image
+          src={selectedProfile}
+          alt={selectedProfile}
+          width={200}
+          height={200}
+          className="h-[200px] w-[200px]"
         />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+      </div>
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex text-center items-center space-y-3 flex-col"
+        >
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password:</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter password..."
+                    {...field}
+                    type="password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex mt-3">
+            <Button
+              type="submit"
+              className="mr-3"
+              onClick={() => {
+                toast({
+                  title: "auth",
+                  description: "Please try again.",
+                });
+              }}
+            >
+              <KeyIcon />
+              Log In
+            </Button>
+            <BackButton />
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }
 
