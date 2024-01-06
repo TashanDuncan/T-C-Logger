@@ -1,4 +1,4 @@
-import Logo from "../logo";
+import Logo from "../ui/components/logo";
 
 export default function Page() {
   return (
