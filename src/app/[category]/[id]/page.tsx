@@ -82,7 +82,11 @@ export default async function Page({
           <h3 className="text-center text-3xl font-bold dark:text-white my-3">
             Your Review
           </h3>
-          <UserReview userItem={userItem} userId={user?.id || ""} itemId={item?.id || 0}/>
+          <UserReview
+            userItem={userItem}
+            userId={user?.id || ""}
+            itemId={item?.id || 0}
+          />
         </div>
         <Separator className="md:hidden my-4" />
         <div className="flex flex-col w-[350px] my-6 items-center">
