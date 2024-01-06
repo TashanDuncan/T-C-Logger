@@ -31,7 +31,7 @@ async function handleDatabaseError(error: unknown, dataType?: string) {
   throw new Error(`Failed to fetch ${dataType || ""} data.`);
 }
 
-export async function fetchUser(id: string){
+export async function fetchUser(id: string) {
   try {
     const user = await prisma.user.findUnique({
       where: { id },
@@ -39,6 +39,7 @@ export async function fetchUser(id: string){
     await prisma.$disconnect();
     return user;
   } catch (error) {
+    await prisma.$disconnect();
     await handleDatabaseError(error, "user");
   }
 }

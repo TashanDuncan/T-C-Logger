@@ -26,6 +26,7 @@ async function getUserByEmail(email: string) {
     return user;
   } catch (error) {
     console.error("Failed to fetch user:", error);
+    await prisma.$disconnect();
     throw new Error("Failed to fetch user.");
   }
 }
