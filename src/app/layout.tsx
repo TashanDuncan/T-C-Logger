@@ -3,6 +3,8 @@ import { Nunito_Sans as FontSans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/app/lib/utils";
+import { Toaster } from "@/app/ui/components/ui/toaster";
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -25,7 +27,10 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
