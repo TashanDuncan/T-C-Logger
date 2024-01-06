@@ -19,7 +19,6 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen justify-center items-center flex-col p-24">
       <Logo />
-      <ThemeToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline">Menu</Button>
@@ -57,6 +56,10 @@ export default async function Home() {
           </Button>
         </a>
       </div>
+      <Link href={"/about-us"}>
+        <Button variant="outline">About Us</Button>
+      </Link>
+      <div className="flex justify-center flex-col p-24"> <ThemeToggle /> </div>
     </main>
   );
 }
