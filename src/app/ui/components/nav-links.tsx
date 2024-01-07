@@ -33,12 +33,12 @@ export default function NavLinks({ links }: { links: JSX.Element[] }) {
         <HomeIcon />
       </Link>
       {linkList}
-      <Link
-        href={"/items/new"}
+      {/* <Link
+        href={"/category/new"}
         className={
           "flex h-[48px] grow items-center justify-center gap-2 rounded-md  p-3 text-sm font-medium  hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
         }
-      ></Link>
+      ></Link> */}
     </>
   );
 }
