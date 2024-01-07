@@ -1,4 +1,4 @@
-import { CreateItem } from "../ui/buttons/create-item";
+import { CreateItem } from "@/app/ui/buttons/create-item";
 import ItemsTable from "./item-table";
 
 export default async function Page({

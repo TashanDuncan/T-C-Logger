@@ -4,7 +4,6 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/app/lib/utils";
 import { Toaster } from "@/app/ui/components/ui/toaster";
-import { MobileNavigation } from "./ui/components/mobile-nav";
 import { fetchItemCategories } from "./lib/data";
 
 const fontSans = FontSans({
@@ -21,8 +20,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const itemCategories = await fetchItemCategories();
-
   return (
     <html lang="en">
       <body
@@ -32,10 +29,7 @@ export default async function RootLayout({
         )}
       >
         <Providers>
-          <div className="md:hidden flex justify-center">
-            <MobileNavigation categories={itemCategories} />
-          </div>
-          <div>{children}</div>
+          {children}
           <Toaster />
         </Providers>
       </body>

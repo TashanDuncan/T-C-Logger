@@ -1,7 +1,7 @@
-import { fetchItemCategories } from "./lib/data";
-import Logo from "./ui/components/logo";
+import { fetchItemCategories } from "../lib/data";
+import Logo from "../ui/components/logo";
 
-import { MobileNavigation } from "./ui/components/mobile-nav";
+import { MobileNavigation } from "../ui/components/mobile-nav";
 
 export default async function Home() {
   const itemCategories = await fetchItemCategories();

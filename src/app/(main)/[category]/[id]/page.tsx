@@ -19,7 +19,6 @@ import {
 } from "@/app/ui/components/ui/select";
 import { getCurrentUser } from "@/app/lib/session";
 import BackButton from "@/app/ui/buttons/back";
-import { MoveLeftIcon } from "lucide-react";
 
 export default async function Page({
   params: { id },
