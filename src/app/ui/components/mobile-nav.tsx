@@ -29,9 +29,6 @@ export function MobileNavigation({
           <Link href="/">
             <MenubarItem>Home</MenubarItem>
           </Link>
-          <MenubarItem>
-            <SignOutButton />
-          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       {categories && (
@@ -73,6 +70,9 @@ export function MobileNavigation({
             </a>
           </MenubarItem>
         </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <SignOutButton />
       </MenubarMenu>
       <MenubarMenu>
         <ThemeToggle />
