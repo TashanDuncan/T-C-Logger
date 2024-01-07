@@ -60,6 +60,7 @@ export function MobileNavigation({
             <a
               href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
               target="_blank"
+              className="flex items-center"
             >
               <span className="inline-flex items-center mr-3">
                 Our Playlist
