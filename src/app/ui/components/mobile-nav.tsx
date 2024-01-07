@@ -35,8 +35,8 @@ export function MobileNavigation() {
       <MenubarMenu>
         <MenubarTrigger>Links</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>Tashan's Website</MenubarItem>
-          <MenubarItem>Christina's Website</MenubarItem>
+          <MenubarItem>Tashan&apos;s Website</MenubarItem>
+          <MenubarItem>Christina&apos;s Website</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
