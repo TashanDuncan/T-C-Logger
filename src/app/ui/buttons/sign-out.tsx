@@ -31,19 +31,20 @@ export default function SignOutButton({
             Are you absolutely sure you want to Sign Out?
           </AlertDialogTitle>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>No</AlertDialogCancel>
-          <form
-            action={async () => {
-              "use server";
-              await signOut();
-            }}
-          >
+        <form
+          action={async () => {
+            "use server";
+            await signOut();
+          }}
+        >
+          <AlertDialogFooter>
+            <AlertDialogCancel>No Thanks!</AlertDialogCancel>
+
             <AlertDialogAction type="submit">
               Yes, Sign me out!
             </AlertDialogAction>
-          </form>
-        </AlertDialogFooter>
+          </AlertDialogFooter>
+        </form>
       </AlertDialogContent>
     </AlertDialog>
   );
