@@ -32,7 +32,7 @@ export default async function RootLayout({
         )}
       >
         <Providers>
-          <div className="md:hidden">
+          <div className="md:hidden flex justify-center">
             <MobileNavigation categories={itemCategories} />
           </div>
           <div>{children}</div>

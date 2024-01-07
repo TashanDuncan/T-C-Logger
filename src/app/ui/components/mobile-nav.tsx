@@ -18,7 +18,7 @@ export function MobileNavigation({
   categories: ItemCategory[] | undefined;
 }) {
   return (
-    <Menubar>
+    <Menubar className="h-16 w-full flex justify-center">
       <MenubarMenu>
         <Link href="/">
           <Button variant="outline" className="border-none">
@@ -28,7 +28,11 @@ export function MobileNavigation({
       </MenubarMenu>
       {categories && (
         <MenubarMenu>
-          <MenubarTrigger>Categories</MenubarTrigger>
+          <MenubarTrigger>
+            <Button variant="outline" className="border-none">
+              Categories
+            </Button>
+          </MenubarTrigger>
           <MenubarContent>
             {categories.map((category) => (
               <Link href={`/${category.slug}`} key={category.id}>
@@ -41,9 +45,15 @@ export function MobileNavigation({
         </MenubarMenu>
       )}
       <MenubarMenu>
-        <MenubarTrigger>Links</MenubarTrigger>
+        <MenubarTrigger>
+          <Button variant="outline" className="border-none">
+            Links
+          </Button>
+        </MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>Tashan&apos;s Website</MenubarItem>
+          <a href="https://codingmugen.com" target="_blank">
+            <MenubarItem>Tashan&apos;s Website</MenubarItem>
+          </a>
           <MenubarItem>Christina&apos;s Website</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
