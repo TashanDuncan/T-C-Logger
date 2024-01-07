@@ -13,12 +13,16 @@ import Image from "next/image";
 import { ItemCategory } from "@prisma/client";
 import SignOutButton from "../buttons/sign-out";
 import { Menu } from "lucide-react";
+import { getCurrentUser } from "@/app/lib/session";
+import { Badge } from "./ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-export function MobileNavigation({
+export async function MobileNavigation({
   categories,
 }: {
   categories: ItemCategory[] | undefined;
 }) {
+  const user = await getCurrentUser();
   return (
     <Menubar className="h-16 w-full flex justify-center">
       <MenubarMenu>
@@ -26,6 +30,9 @@ export function MobileNavigation({
           <Menu />
         </MenubarTrigger>
         <MenubarContent>
+          <MenubarItem disabled>
+            <span className="text-sm italic">Signed in as {user?.name}</span>
+          </MenubarItem>
           <Link href="/">
             <MenubarItem>Home</MenubarItem>
           </Link>
@@ -72,7 +79,17 @@ export function MobileNavigation({
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <SignOutButton />
+        <MenubarTrigger>
+          <Avatar>
+            <AvatarImage src={user?.image || ""} />
+            <AvatarFallback>
+              {user?.name ? user?.name[0].toUpperCase() : "N/A"}
+            </AvatarFallback>
+          </Avatar>
+        </MenubarTrigger>
+        <MenubarContent>
+          <SignOutButton variant="outline" className="border-none" />
+        </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
         <ThemeToggle />
