@@ -11,11 +11,19 @@ import {
   AlertDialogTrigger,
 } from "../components/ui/alert-dialog";
 
-export default function SignOutButton({ className }: { className?: string }) {
+export default function SignOutButton({
+  className,
+  variant,
+}: {
+  className?: string;
+  variant?: "outline";
+}) {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button className={className}>Sign Out</Button>
+        <Button variant={variant} className={className}>
+          Sign Out
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
