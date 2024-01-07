@@ -5,6 +5,7 @@ import { fetchItemCategories } from "../../lib/data";
 import { ThemeToggle } from "./theme-toggle";
 import { getCurrentUser } from "@/app/lib/session";
 import SignOutButton from "../buttons/sign-out";
+import { Button } from "./ui/button";
 
 export default async function SideNav() {
   const itemCategories = await fetchItemCategories();
@@ -38,9 +39,25 @@ export default async function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         {itemCategoryLinks && <NavLinks links={itemCategoryLinks} />}
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
-        <span>Signed in as {user?.name}</span>
-        <div className="flex justify-between">
+        <span className="text-sm italic">Signed in as {user?.name}</span>
+        <div className="flex justify-between items-center">
           <SignOutButton />
+          <a
+            href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
+            target="_blank"
+            className="flex items-center"
+          >
+            <Button variant="outline" className="border-none">
+              <Image
+                src={"/spotifyicon.png"}
+                alt="Spotify Icon"
+                width={30}
+                height={30}
+                className="h-[1.2rem] w-[1.2rem]"
+              />
+            </Button>
+          </a>
+
           <ThemeToggle />
         </div>
       </div>
