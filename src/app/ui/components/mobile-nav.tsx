@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { ItemCategory } from "@prisma/client";
 import SignOutButton from "../buttons/sign-out";
+import { Menu } from "lucide-react";
 
 export function MobileNavigation({
   categories,
@@ -21,19 +22,21 @@ export function MobileNavigation({
   return (
     <Menubar className="h-16 w-full flex justify-center">
       <MenubarMenu>
-        <Link href="/">
-          <Button variant="outline" className="border-none">
-            Home
-          </Button>
-        </Link>
+        <MenubarTrigger>
+          <Menu />
+        </MenubarTrigger>
+        <MenubarContent>
+          <Link href="/">
+            <MenubarItem>Home</MenubarItem>
+          </Link>
+          <MenubarItem>
+            <SignOutButton />
+          </MenubarItem>
+        </MenubarContent>
       </MenubarMenu>
       {categories && (
         <MenubarMenu>
-          <MenubarTrigger>
-            <Button variant="outline" className="border-none">
-              Categories
-            </Button>
-          </MenubarTrigger>
+          <MenubarTrigger>Categories</MenubarTrigger>
           <MenubarContent>
             {categories.map((category) => (
               <Link href={`/${category.slug}`} key={category.id}>
@@ -46,11 +49,7 @@ export function MobileNavigation({
         </MenubarMenu>
       )}
       <MenubarMenu>
-        <MenubarTrigger>
-          <Button variant="outline" className="border-none">
-            Links
-          </Button>
-        </MenubarTrigger>
+        <MenubarTrigger>Links</MenubarTrigger>
         <MenubarContent>
           <a href="https://codingmugen.com" target="_blank">
             <MenubarItem>Tashan&apos;s Website</MenubarItem>
@@ -74,10 +73,6 @@ export function MobileNavigation({
             </a>
           </MenubarItem>
         </MenubarContent>
-      </MenubarMenu>
-      <MenubarMenu></MenubarMenu>
-      <MenubarMenu>
-        <SignOutButton />
       </MenubarMenu>
       <MenubarMenu>
         <ThemeToggle />
