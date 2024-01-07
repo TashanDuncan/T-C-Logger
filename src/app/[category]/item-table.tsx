@@ -28,7 +28,7 @@ export default async function ItemsTable({ query }: { query: string }) {
   const partner = await fetchUser(user?.partnerId || "");
   const category = query.replace(/-/g, " ");
   return (
-    <Table className="table-fixed">
+    <Table className="table-fixed w-full">
       {items?.length === 0 && (
         <TableCaption className="mb-3">No {category} Found</TableCaption>
       )}
