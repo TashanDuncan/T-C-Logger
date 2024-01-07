@@ -38,7 +38,7 @@ export default function ProfileSelection({
               setSelectedProfile({
                 name: "Christina",
                 image: "/christina.png",
-                email: "chrstina@test.com",
+                email: "christina@test.com",
               })
             }
           />
