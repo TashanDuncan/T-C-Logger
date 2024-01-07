@@ -11,6 +11,7 @@ import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { ItemCategory } from "@prisma/client";
+import SignOutButton from "../buttons/sign-out";
 
 export function MobileNavigation({
   categories,
@@ -55,23 +56,27 @@ export function MobileNavigation({
             <MenubarItem>Tashan&apos;s Website</MenubarItem>
           </a>
           <MenubarItem>Christina&apos;s Website</MenubarItem>
+          <MenubarItem>
+            <a
+              href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
+              target="_blank"
+            >
+              <span className="inline-flex items-center mr-3">
+                Our Playlist
+              </span>
+              <Image
+                src={"/spotifyicon.png"}
+                alt="Spotify Icon"
+                width={20}
+                height={20}
+              />
+            </a>
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
+      <MenubarMenu></MenubarMenu>
       <MenubarMenu>
-        <a
-          href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
-          target="_blank"
-        >
-          <Button variant="outline" className="border-none">
-            <span className="inline-flex items-center mr-3">Our Playlist</span>
-            <Image
-              src={"/spotifyicon.png"}
-              alt="Spotify Icon"
-              width={20}
-              height={20}
-            />
-          </Button>
-        </a>
+        <SignOutButton />
       </MenubarMenu>
       <MenubarMenu>
         <ThemeToggle />
