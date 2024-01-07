@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import { cn } from "@/app/lib/utils";
 import { Toaster } from "@/app/ui/components/ui/toaster";
 import { MobileNavigation } from "./ui/components/mobile-nav";
+import { fetchItemCategories } from "./lib/data";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -20,6 +21,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const itemCategories = await fetchItemCategories();
+
   return (
     <html lang="en">
       <body
@@ -30,11 +33,9 @@ export default async function RootLayout({
       >
         <Providers>
           <div className="md:hidden">
-            <MobileNavigation />
+            <MobileNavigation categories={itemCategories} />
           </div>
-          <div >
-            {children}
-          </div>
+          <div>{children}</div>
           <Toaster />
         </Providers>
       </body>

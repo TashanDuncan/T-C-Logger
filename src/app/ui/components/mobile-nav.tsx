@@ -10,8 +10,13 @@ import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { ItemCategory } from "@prisma/client";
 
-export function MobileNavigation() {
+export function MobileNavigation({
+  categories,
+}: {
+  categories: ItemCategory[] | undefined;
+}) {
   return (
     <Menubar>
       <MenubarMenu>
@@ -21,17 +26,20 @@ export function MobileNavigation() {
           </Button>
         </Link>
       </MenubarMenu>
-      {/* <MenubarMenu>
-        <Link href="/about-us">
-          <MenubarTrigger>About Us</MenubarTrigger>
-        </Link>
-      </MenubarMenu> */}
-      <MenubarMenu>
-        <MenubarTrigger>Categories</MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>Books</MenubarItem>
-        </MenubarContent>
-      </MenubarMenu>
+      {categories && (
+        <MenubarMenu>
+          <MenubarTrigger>Categories</MenubarTrigger>
+          <MenubarContent>
+            {categories.map((category) => (
+              <Link href={`/${category.slug}`} key={category.id}>
+                <MenubarCheckboxItem>
+                  {category.description}
+                </MenubarCheckboxItem>
+              </Link>
+            ))}
+          </MenubarContent>
+        </MenubarMenu>
+      )}
       <MenubarMenu>
         <MenubarTrigger>Links</MenubarTrigger>
         <MenubarContent>
