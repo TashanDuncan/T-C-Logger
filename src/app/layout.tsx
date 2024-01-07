@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/app/lib/utils";
 import { Toaster } from "@/app/ui/components/ui/toaster";
+import { MobileNavigation } from "./ui/components/mobile-nav";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,7 +29,12 @@ export default async function RootLayout({
         )}
       >
         <Providers>
-          {children}
+          <div className="md:hidden">
+            <MobileNavigation />
+          </div>
+          <div >
+            {children}
+          </div>
           <Toaster />
         </Providers>
       </body>
