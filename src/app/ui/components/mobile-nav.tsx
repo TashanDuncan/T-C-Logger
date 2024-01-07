@@ -79,6 +79,9 @@ export async function MobileNavigation({
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
+        <ThemeToggle />
+      </MenubarMenu>
+      <MenubarMenu>
         <MenubarTrigger>
           <Avatar>
             <AvatarImage src={user?.image || ""} />
@@ -90,9 +93,6 @@ export async function MobileNavigation({
         <MenubarContent>
           <SignOutButton variant="outline" className="border-none" />
         </MenubarContent>
-      </MenubarMenu>
-      <MenubarMenu>
-        <ThemeToggle />
       </MenubarMenu>
     </Menubar>
   );
