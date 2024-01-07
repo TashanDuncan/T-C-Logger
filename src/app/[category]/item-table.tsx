@@ -26,14 +26,12 @@ export default async function ItemsTable({ query }: { query: string }) {
   const items = await fetchItemsByType(query);
   const user = await getCurrentUser();
   const partner = await fetchUser(user?.partnerId || "");
-
+  const category = query.replace(/-/g, " ");
   return (
     <Table className="table-fixed">
-      <TableCaption>
-        {items && items?.length > 0
-          ? `A list of your ${query}.`
-          : `No ${query} Found`}
-      </TableCaption>
+      {items?.length === 0 && (
+        <TableCaption className="mb-3">No {category} Found</TableCaption>
+      )}
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>
