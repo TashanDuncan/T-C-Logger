@@ -18,6 +18,8 @@ import { z } from "zod";
 import { Checkbox } from "@/app/ui/components/ui/checkbox";
 import { createOrUpdateUserItem } from "@/app/lib/actions";
 import BackButton from "@/app/ui/buttons/back";
+import { useToast } from "@/app/ui/components/ui/use-toast";
+import { use, useEffect } from "react";
 
 async function onSubmit(values: z.infer<typeof UserItemSchema>) {
   console.log(values);
@@ -33,6 +35,8 @@ export default function UserReview({
   userId: string;
   itemId: number;
 }) {
+  const { toast } = useToast();
+  
   const form = useForm<z.infer<typeof UserItemSchema>>({
     resolver: zodResolver(UserItemSchema),
     defaultValues: {
@@ -43,6 +47,14 @@ export default function UserReview({
       experienced: !!userItem?.experienced,
     },
   });
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      toast({
+        title: "Review Submitted",
+        description: "Your review has been submitted.",
+      });
+    }
+  }, [form.formState.submitCount, form.formState.isSubmitSuccessful, toast]);
 
   return (
     <Form {...form}>
@@ -94,10 +106,14 @@ export default function UserReview({
           )}
         />
         <div className="mt-3">
-          <Button className="mr-3" type="submit">
-            Update
+          <Button
+            className="mr-3"
+            type="submit"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? "Submitting..." : "Update"}
           </Button>
-          <BackButton className="hidden md:inline-block"/>
+          <BackButton className="hidden md:inline-block" />
         </div>
       </form>
     </Form>
