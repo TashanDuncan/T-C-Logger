@@ -29,6 +29,7 @@ import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { CreateItemSchema } from "@/app/lib/utils";
 import BackButton from "@/app/ui/buttons/back";
+import { useEffect } from "react";
 
 async function onSubmit(values: z.infer<typeof CreateItemSchema>) {
   console.log(values);
@@ -50,6 +51,12 @@ export default function CreateItemForm({
       experienced: false,
     },
   });
+
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      form.reset();
+    }
+  }, [form.formState.isSubmitSuccessful, form]);
 
   return (
     <Form {...form}>
@@ -166,10 +173,15 @@ export default function CreateItemForm({
           )}
         />
         <div>
-          <Button type="submit" className="mr-3">Submit</Button>
+          <Button
+            className="mr-3"
+            type="submit"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? "Submitting..." : "Submit"}
+          </Button>{" "}
           <BackButton />
         </div>
-
       </form>
     </Form>
   );
