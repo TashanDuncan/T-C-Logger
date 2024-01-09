@@ -1,5 +1,5 @@
 import { fetchItemById, fetchUser } from "@/app/lib/data";
-import { getRatingValue } from "@/app/lib/utils";
+import { MetadataProps, getRatingValue } from "@/app/lib/utils";
 import { Badge } from "@/app/ui/components/ui/badge";
 import {
   Card,
@@ -19,6 +19,18 @@ import {
 } from "@/app/ui/components/ui/select";
 import { getCurrentUser } from "@/app/lib/session";
 import BackButton from "@/app/ui/buttons/back";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: MetadataProps): Promise<Metadata> {
+  const { id } = params;
+  const item = await fetchItemById(parseInt(id));
+
+  return {
+    title: item?.title || "Item",
+  };
+}
 
 export default async function Page({
   params: { id },
