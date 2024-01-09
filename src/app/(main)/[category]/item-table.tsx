@@ -1,4 +1,4 @@
-import { PencilLineIcon } from "lucide-react";
+import { EyeIcon, PencilLineIcon } from "lucide-react";
 
 import { Tag } from "@prisma/client";
 
@@ -86,16 +86,19 @@ export default async function ItemsTable({ query }: { query: string }) {
               <TableCell>{getRatingValue(partnerItem?.rating ?? 0)}</TableCell>
               <TableCell>{getRatingValue(item.avgRating)}</TableCell>
               <TableCell>
-                <Link href={`/${query}/${item.id.toString()}`}>
-                  <Button
-                    variant="outline"
-                    className="hover:text-blue-600 mx-2"
-                  >
-                    <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
-                  </Button>
-                </Link>
-
-                <DeleteItem item={item} />
+                <div className="flex flex-wrap">
+                  <Link href={`/${query}/${item.id.toString()}`}>
+                    <Button variant="outline" className="hover:text-blue-600">
+                      <EyeIcon className=" w-4 h-4 md:w-5 md:h-5" />
+                    </Button>
+                  </Link>
+                  <Link href={`/${query}/${item.id.toString()}/edit`}>
+                    <Button variant="outline" className="hover:text-blue-600">
+                      <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
+                    </Button>
+                  </Link>
+                  <DeleteItem item={item} />
+                </div>
               </TableCell>
             </TableRow>
           );

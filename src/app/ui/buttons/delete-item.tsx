@@ -21,7 +21,7 @@ export function DeleteItem({ item }: { item: ItemWithAvgRating }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button variant="outline" className="hover:text-blue-600 mx-2">
+        <Button variant="outline" className="hover:text-blue-600">
           <Trash2Icon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
         </Button>
       </AlertDialogTrigger>
