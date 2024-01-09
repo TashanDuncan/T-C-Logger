@@ -92,3 +92,19 @@ export const UserItemSchema = FormSchema.omit({
   date: true,
   category: true,
 });
+
+export type MetadataProps = {
+  params: { id: string; category: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export function capitalizeFirstLetterAndRemoveDashes(text: string): string {
+  return text
+    .split('-')
+    .map(capitalizeFirstLetter)
+    .join(' ');
+}
+
+export function capitalizeFirstLetter(word: string): string {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
