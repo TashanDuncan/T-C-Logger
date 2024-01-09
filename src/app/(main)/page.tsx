@@ -14,6 +14,17 @@ export default async function Home() {
         <div className="md:absolute md:flex self-start">
           <Logo />
         </div>
+        <div className="flex md:w-[500px] md:text-balance">
+          <p>
+            We are Tashan and Christina, we met in 2022 and have been together
+            ever since. As a couple, we like going out for food, or for some
+            type of activity but we mainly like staying in and we like watching
+            anime, playing computer games, listening to music from our playlist
+            and code. Well, mainly Tashan teaches me how to code and together we
+            created this site. We created this site to record things and places
+            we experienced together and leave our honest reviews.
+          </p>
+        </div>
       </main>
     </>
   );
