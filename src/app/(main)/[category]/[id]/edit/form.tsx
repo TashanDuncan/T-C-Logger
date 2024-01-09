@@ -31,6 +31,7 @@ import { ItemSchemaWithId } from "@/app/lib/utils";
 import BackButton from "@/app/ui/buttons/back";
 import { useEffect } from "react";
 import { ItemWithAvgRating } from "@/app/lib/data";
+import { useToast } from "@/app/ui/components/ui/use-toast";
 
 async function onSubmit(values: z.infer<typeof ItemSchemaWithId>) {
   console.log(values);
@@ -47,6 +48,8 @@ export default function EditItemForm({
   item: ItemWithAvgRating;
   userItem?: UserItem;
 }) {
+  const { toast } = useToast();
+
   const currentCategory = usePathname().split("/")[1];
   const form = useForm<z.infer<typeof ItemSchemaWithId>>({
     resolver: zodResolver(ItemSchemaWithId),
@@ -64,9 +67,12 @@ export default function EditItemForm({
 
   useEffect(() => {
     if (form.formState.isSubmitSuccessful) {
-      form.reset();
+      toast({
+        title: "Feature not implemented",
+        description: "This feature is not implemented yet",
+      });
     }
-  }, [form.formState.isSubmitSuccessful, form]);
+  }, [form.formState.submitCount, form.formState.isSubmitSuccessful, toast]);
 
   return (
     <Form {...form}>
