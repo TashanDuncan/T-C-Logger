@@ -2,7 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { CreateItemSchema, UserItemSchema } from "./utils";
+import { ItemSchema, UserItemSchema } from "./utils";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { z } from "zod";
@@ -32,8 +32,8 @@ export async function deleteItem(id: number) {
   }
 }
 
-export async function createItem(data: z.infer<typeof CreateItemSchema>) {
-  const validatedData = CreateItemSchema.parse(data);
+export async function createItem(data: z.infer<typeof ItemSchema>) {
+  const validatedData = ItemSchema.parse(data);
   const category = await prisma.itemCategory.findUnique({
     where: { slug: validatedData.category },
   });

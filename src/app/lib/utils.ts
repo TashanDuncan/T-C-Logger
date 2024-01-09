@@ -85,7 +85,7 @@ const FormSchema = z.object({
   date: z.string(),
 });
 
-export const CreateItemSchema = FormSchema.omit({ id: true, date: true });
+export const ItemSchema = FormSchema.omit({ id: true, date: true });
 export const UserItemSchema = FormSchema.omit({
   title: true,
   description: true,
@@ -99,10 +99,7 @@ export type MetadataProps = {
 };
 
 export function capitalizeFirstLetterAndRemoveDashes(text: string): string {
-  return text
-    .split('-')
-    .map(capitalizeFirstLetter)
-    .join(' ');
+  return text.split("-").map(capitalizeFirstLetter).join(" ");
 }
 
 export function capitalizeFirstLetter(word: string): string {

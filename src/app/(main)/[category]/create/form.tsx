@@ -27,11 +27,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ItemCategory } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { CreateItemSchema } from "@/app/lib/utils";
+import { ItemSchema } from "@/app/lib/utils";
 import BackButton from "@/app/ui/buttons/back";
 import { useEffect } from "react";
 
-async function onSubmit(values: z.infer<typeof CreateItemSchema>) {
+async function onSubmit(values: z.infer<typeof ItemSchema>) {
   console.log(values);
   await createItem(values);
 }
@@ -43,8 +43,8 @@ export default function CreateItemForm({
   userId: string;
 }) {
   const currentCategory = usePathname().split("/")[1];
-  const form = useForm<z.infer<typeof CreateItemSchema>>({
-    resolver: zodResolver(CreateItemSchema),
+  const form = useForm<z.infer<typeof ItemSchema>>({
+    resolver: zodResolver(ItemSchema),
     defaultValues: {
       userId,
       category: currentCategory,
