@@ -20,8 +20,10 @@ import { ProfileProps } from "./profiles";
 
 export default function LoginForm({
   selectedProfile,
+  setSelectedProfile,
 }: {
   selectedProfile: ProfileProps;
+  setSelectedProfile: any;
 }) {
   const { toast } = useToast();
   const { name, image, email } = selectedProfile;
@@ -79,7 +81,14 @@ export default function LoginForm({
               <KeyIcon />
               Log In
             </Button>
-            <BackButton />
+            <Button
+              type="button"
+              onClick={() => {
+                setSelectedProfile(null);
+              }}
+            >
+              Back
+            </Button>
           </div>
         </form>
       </Form>
