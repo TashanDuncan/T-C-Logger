@@ -30,9 +30,6 @@ export async function MobileNavigation({
           <Menu />
         </MenubarTrigger>
         <MenubarContent>
-          <MenubarItem disabled>
-            <span className="text-sm italic">Signed in as {user?.name}</span>
-          </MenubarItem>
           <Link href="/">
             <MenubarItem>Home</MenubarItem>
           </Link>
@@ -91,7 +88,10 @@ export async function MobileNavigation({
           </Avatar>
         </MenubarTrigger>
         <MenubarContent>
-          <SignOutButton variant="outline" className="border-none" />
+          <MenubarItem disabled>
+            <span className="text-sm italic">Signed in as {user?.name}</span>
+          </MenubarItem>
+          <SignOutButton />
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
