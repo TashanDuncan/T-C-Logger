@@ -86,6 +86,7 @@ const FormSchema = z.object({
 });
 
 export const ItemSchema = FormSchema.omit({ id: true, date: true });
+export const ItemSchemaWithId = FormSchema.omit({ date: true });
 export const UserItemSchema = FormSchema.omit({
   title: true,
   description: true,
