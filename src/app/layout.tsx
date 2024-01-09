@@ -4,7 +4,6 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { cn } from "@/app/lib/utils";
 import { Toaster } from "@/app/ui/components/ui/toaster";
-import { fetchItemCategories } from "./lib/data";
 
 const fontSans = FontSans({
   subsets: ["latin"],
