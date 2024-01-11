@@ -1,6 +1,6 @@
 "use client";
 
-import { createItem } from "@/app/lib/actions";
+import { updateItem } from "@/app/lib/actions";
 import { z } from "zod";
 import RatingOptions from "@/app/ui/components/rating-options";
 import { Button } from "@/app/ui/components/ui/button";
@@ -35,7 +35,7 @@ import { useToast } from "@/app/ui/components/ui/use-toast";
 
 async function onSubmit(values: z.infer<typeof ItemSchemaWithId>) {
   console.log(values);
-  //TODO: server action to update item
+  await updateItem(values);
 }
 export default function EditItemForm({
   categories,
@@ -68,8 +68,8 @@ export default function EditItemForm({
   useEffect(() => {
     if (form.formState.isSubmitSuccessful) {
       toast({
-        title: "Feature not implemented",
-        description: "This feature is not implemented yet",
+        title: "Item Updated",
+        description: "Your item has been updated.",
       });
     }
   }, [form.formState.submitCount, form.formState.isSubmitSuccessful, toast]);

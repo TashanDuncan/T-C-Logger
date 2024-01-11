@@ -2,7 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { ItemSchema, UserItemSchema } from "./utils";
+import { ItemSchema, ItemSchemaWithId, UserItemSchema } from "./utils";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { z } from "zod";
@@ -67,6 +67,60 @@ export async function createItem(data: z.infer<typeof ItemSchema>) {
   }
   revalidatePath(`/${category.slug}`);
   redirect(`/${category.slug}`);
+}
+
+export async function updateItem(data: z.infer<typeof ItemSchemaWithId>) {
+  const validatedData = ItemSchemaWithId.parse(data);
+  const category = await prisma.itemCategory.findUnique({
+    where: { slug: validatedData.category },
+  });
+  if (!category?.id) {
+    throw new Error("Invalid category.");
+  }
+  try {
+    await prisma.item.update({
+      where: {
+        id: validatedData.id,
+      },
+      data: {
+        title: validatedData.title,
+        description: validatedData.description,
+        categoryId: category.id,
+        userItems: {
+          upsert: {
+            where: {
+              userId_itemId: {
+                userId: validatedData.userId,
+                itemId: validatedData.id,
+              },
+            },
+            create: {
+              rating: validatedData.rating || 0,
+              experienced: validatedData.experienced,
+              review: validatedData.review,
+              users: {
+                connect: {
+                  id: validatedData.userId,
+                },
+              },
+            },
+            update: {
+              rating: validatedData.rating || 0,
+              experienced: validatedData.experienced,
+              review: validatedData.review,
+            },
+          },
+        },
+      },
+    });
+    await prisma.$disconnect();
+  } catch (error) {
+    console.error("Database Error:", error);
+    await prisma.$disconnect();
+    throw new Error(`Failed to create data.`);
+  }
+  revalidatePath(`/${category.slug}/${validatedData.id}`);
+  redirect(`/${category.slug}/${validatedData.id}`);
 }
 
 export async function createOrUpdateUserItem(
