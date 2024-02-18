@@ -67,18 +67,6 @@ async function main() {
       description: "Movies",
     },
   });
-  const books = await prisma.itemCategory.create({
-    data: {
-      slug: "books",
-      description: "Books",
-    },
-  });
-  const music = await prisma.itemCategory.create({
-    data: {
-      slug: "music",
-      description: "Music",
-    },
-  });
   const games = await prisma.itemCategory.create({
     data: {
       slug: "games",
@@ -212,8 +200,6 @@ async function main() {
     item_categories: {
       tvShows,
       movies,
-      books,
-      music,
       games,
       places,
       restaurants,
