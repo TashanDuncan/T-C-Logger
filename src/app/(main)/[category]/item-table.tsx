@@ -39,8 +39,8 @@ export default async function ItemsTable({ query }: { query: string }) {
           <TableHead>Name</TableHead>
           <TableHead className="hidden md:table-cell">Tags</TableHead>
           <TableHead className="hidden md:table-cell">Experienced</TableHead>
-          <TableHead>Your Rating</TableHead>
-          <TableHead>Partner Rating</TableHead>
+          <TableHead>Tashan Rating</TableHead>
+          <TableHead>Christina Rating</TableHead>
           <TableHead>Average Rating</TableHead>
           <TableHead>Actions</TableHead>
         </TableRow>
@@ -48,10 +48,8 @@ export default async function ItemsTable({ query }: { query: string }) {
       <TableBody>
         {items?.map((item) => {
           const { tags, userItems } = item;
-          const userItem = userItems.find((item) => item.userId === user?.id);
-          const partnerItem = userItems.find(
-            (item) => item.userId === user?.partnerId
-          );
+          const tashan = userItems.find((item) => item.userId === "1");
+          const christina = userItems.find((item) => item.userId === "2");
           return (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>
@@ -64,17 +62,17 @@ export default async function ItemsTable({ query }: { query: string }) {
               </TableCell>
               <TableCell className="hidden md:table-cell">
                 <div className="flex flex-wrap">
-                  {userItem?.experienced && (
+                  {tashan?.experienced && (
                     <Avatar className="mx-2">
-                      <AvatarImage src={user?.image || ""} />
+                      <AvatarImage src="tashan.jpg" alt="tashan" />
                       <AvatarFallback>
                         {user?.name ? user?.name[0].toUpperCase() : "N/A"}
                       </AvatarFallback>
                     </Avatar>
                   )}
-                  {partnerItem?.experienced && (
+                  {christina?.experienced && (
                     <Avatar className="mx-2">
-                      <AvatarImage src={partner?.image || ""} />
+                      <AvatarImage src="christina.png" alt="christina" />
                       <AvatarFallback>
                         {partner?.name[0].toUpperCase() ?? "N/A"}
                       </AvatarFallback>
@@ -82,8 +80,8 @@ export default async function ItemsTable({ query }: { query: string }) {
                   )}
                 </div>
               </TableCell>
-              <TableCell>{getRatingValue(userItem?.rating ?? 0)}</TableCell>
-              <TableCell>{getRatingValue(partnerItem?.rating ?? 0)}</TableCell>
+              <TableCell>{getRatingValue(tashan?.rating ?? 0)}</TableCell>
+              <TableCell>{getRatingValue(christina?.rating ?? 0)}</TableCell>
               <TableCell>{getRatingValue(item.avgRating)}</TableCell>
               <TableCell>
                 <div className="flex flex-wrap">
@@ -92,12 +90,19 @@ export default async function ItemsTable({ query }: { query: string }) {
                       <EyeIcon className=" w-4 h-4 md:w-5 md:h-5" />
                     </Button>
                   </Link>
-                  <Link href={`/${query}/${item.id.toString()}/edit`}>
-                    <Button variant="outline" className="hover:text-blue-600">
-                      <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
-                    </Button>
-                  </Link>
-                  <DeleteItem item={item} />
+                  {!!user && (
+                    <>
+                      <Link href={`/${query}/${item.id.toString()}/edit`}>
+                        <Button
+                          variant="outline"
+                          className="hover:text-blue-600"
+                        >
+                          <PencilLineIcon className="shrink-0 w-4 h-4 md:w-5 md:h-5" />
+                        </Button>
+                      </Link>
+                      <DeleteItem item={item} />
+                    </>
+                  )}
                 </div>
               </TableCell>
             </TableRow>
