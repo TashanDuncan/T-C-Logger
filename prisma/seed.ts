@@ -24,6 +24,20 @@ async function main() {
       password: "password2",
     },
   });
+
+  const guest = await prisma.user.upsert({
+    where: { email: "guest@test.com"},
+    update: {},
+    create: {
+      id: "3",
+      email: "guest@test.com",
+      name: "Guest",
+      image: "/guest.png",
+      password: "password",
+    },
+  });
+
+
   // make both users partners
 
   await prisma.user.update({
@@ -194,7 +208,7 @@ async function main() {
   });
 
   console.log({
-    users: { tashan, christina },
+    users: { tashan, christina, guest },
     item_categories: {
       tvShows,
       movies,
