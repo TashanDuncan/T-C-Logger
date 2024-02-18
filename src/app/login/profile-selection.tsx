@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "../ui/components/ui/button";
+import Link from "next/link";
 
 export default function ProfileSelection({
   setSelectedProfile,
@@ -44,7 +45,7 @@ export default function ProfileSelection({
           />
           <span>Christina</span>
         </div>
-        <div>
+        <Link href={"/"}>
           <Image
             src="/guest.png"
             alt={""}
@@ -53,7 +54,7 @@ export default function ProfileSelection({
             className="w-[200px] h-[200px]"
           />
           <span>Guest</span>
-        </div>
+        </Link>
       </div>
       <Button className="my-8">Manage Profiles</Button>
     </div>

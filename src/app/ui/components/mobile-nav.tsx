@@ -14,7 +14,6 @@ import { ItemCategory } from "@prisma/client";
 import SignOutButton from "../buttons/sign-out";
 import { Menu } from "lucide-react";
 import { getCurrentUser } from "@/app/lib/session";
-import { Badge } from "./ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export async function MobileNavigation({
@@ -81,7 +80,7 @@ export async function MobileNavigation({
       <MenubarMenu>
         <MenubarTrigger>
           <Avatar>
-            <AvatarImage src={user?.image || ""} />
+            <AvatarImage src={user?.image || "./guest.png"} />
             <AvatarFallback>
               {user?.name ? user?.name[0].toUpperCase() : "N/A"}
             </AvatarFallback>
@@ -89,9 +88,17 @@ export async function MobileNavigation({
         </MenubarTrigger>
         <MenubarContent>
           <MenubarItem disabled>
-            <span className="text-sm italic">Signed in as {user?.name}</span>
+            <span className="text-sm italic">
+              Signed in as {user?.name || "Guest"}
+            </span>
           </MenubarItem>
-          <SignOutButton />
+          {!!user ? (
+            <SignOutButton />
+          ) : (
+            <Link href="/login">
+              <Button>Sign In</Button>
+            </Link>
+          )}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

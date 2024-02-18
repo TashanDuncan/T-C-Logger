@@ -13,10 +13,10 @@ import {
   FormMessage,
 } from "../ui/components/ui/form";
 import { Input } from "../ui/components/ui/input";
-import BackButton from "../ui/buttons/back";
 import Image from "next/image";
 import { useToast } from "../ui/components/ui/use-toast";
 import { ProfileProps } from "./profiles";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm({
   selectedProfile,
@@ -27,6 +27,7 @@ export default function LoginForm({
 }) {
   const { toast } = useToast();
   const { name, image, email } = selectedProfile;
+  const router = useRouter();
 
   async function onSubmit(values: any) {
     const authFailures = await authenticate({
@@ -38,6 +39,9 @@ export default function LoginForm({
         title: authFailures,
         description: "Please try again.",
       });
+    } else {
+      router.push("/");
+      router.refresh();
     }
   }
   const form = useForm({});
