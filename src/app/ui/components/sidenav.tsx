@@ -39,9 +39,11 @@ export default async function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         {itemCategoryLinks && <NavLinks links={itemCategoryLinks} />}
         <div className="hidden h-auto w-full grow rounded-md md:block"></div>
-        <span className="text-sm italic">Signed in as {user?.name}</span>
+        <span className="text-sm italic">
+          Signed in as {user?.name || "Guest"}
+        </span>
         <div className="flex justify-between items-center">
-          <SignOutButton />
+          {!!user && <SignOutButton />}
           <a
             href="https://open.spotify.com/playlist/6FsTeuxK1Y3jgAIxyVqtbE?si=98143e7825ed458f"
             target="_blank"
